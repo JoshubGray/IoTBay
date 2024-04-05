@@ -23,6 +23,7 @@ buildNumber.properties
 !.vscode/*.code-snippets
 
 # VsCode history
+.history/
 
 # VsCode Ext
 *.vsix
