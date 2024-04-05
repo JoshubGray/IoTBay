@@ -19,13 +19,21 @@
         </nav>
     </head>
     <body>
-        <%-- Retrieve form data using request.getParameter() --%>
-        <% String email = request.getParameter("email"); %>
-        <% String password = request.getParameter("password"); %>
         <div class="outer-container">
             <div class="flex-container">
-                <p>Email: <%= email %></p>
-                <p>Password: <%= password %></p>
+                <form action="welcome.jsp" method="post" class="login-form">
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit">Login</button>
+                    </div>
+                </form>                
             </div>
         </div>
     </body>
