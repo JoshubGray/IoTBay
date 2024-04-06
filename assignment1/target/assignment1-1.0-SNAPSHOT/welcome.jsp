@@ -1,5 +1,8 @@
+<%@ page import="com.iotbay.User" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Random"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="javax.servlet.http.HttpServletRequest" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,12 +12,12 @@
         <title>Login</title>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="index.jsp">Home</a></li>
                 <li><a href="login.jsp">Login</a></li>
                 <li><a href="#">Register</a></li>
-                <li><a href="#">Welcome</a></li>
+                <li><a href="welcome.jsp">Welcome</a></li>
                 <li><a href="#">Main</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="logout.jsp">Logout</a></li>
             </ul>
         </nav>
     </head>
@@ -24,9 +27,16 @@
         <% String password = request.getParameter("password"); %>
         <div class="outer-container">
             <div class="flex-container">
-                <p>Email: <%= email %></p>
-                <p>Password: <%= password %></p>
+                <%
+                User user = (User) session.getAttribute("user");
+                if (user == null) {
+                    user = new User(email, password);
+                    session.setAttribute("user", user);
+                }
+                %>
+                <p>Email: <%= user.getEmail() %></p>
+                <p>Password: <%= user.getPassword() %></p>
             </div>
-        </div>
+        </div>        
     </body>
 </html>
