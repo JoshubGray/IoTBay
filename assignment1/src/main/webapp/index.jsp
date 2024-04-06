@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Random"%>
+<%@ page import="com.iotbay.User" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,7 +14,7 @@
                 <li><a href="login.jsp">Login</a></li>
                 <li><a href="#">Register</a></li>
                 <li><a href="welcome.jsp">Welcome</a></li>
-                <li><a href="#">Main</a></li>
+                <li><a href="main.jsp">Main</a></li>
                 <li><a href="logout.jsp">Logout</a></li>
             </ul>
         </nav>
