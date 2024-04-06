@@ -9,12 +9,12 @@
         <title>Home Page</title>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="index.jsp">Home</a></li>
                 <li><a href="login.jsp">Login</a></li>
                 <li><a href="#">Register</a></li>
-                <li><a href="#">Welcome</a></li>
+                <li><a href="welcome.jsp">Welcome</a></li>
                 <li><a href="#">Main</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="logout.jsp">Logout</a></li>
             </ul>
         </nav>
     </head>
