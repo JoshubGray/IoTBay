@@ -16,7 +16,7 @@
                 <li><a href="login.jsp">Login</a></li>
                 <li><a href="#">Register</a></li>
                 <li><a href="welcome.jsp">Welcome</a></li>
-                <li><a href="#">Main</a></li>
+                <li><a href="main.jsp">Main</a></li>
                 <li><a href="logout.jsp">Logout</a></li>
             </ul>
         </nav>
@@ -34,6 +34,9 @@
                     session.setAttribute("user", user);
                 }
                 %>
+                <div style="padding: 20px;">
+                    <h2>Welcome!</h2>
+                </div>
                 <p>Email: <%= user.getEmail() %></p>
                 <p>Password: <%= user.getPassword() %></p>
             </div>
