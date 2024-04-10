@@ -8,7 +8,7 @@ body {
     font-family: sans-serif;
 }
 .outer-container {
-    background: #a1a7e3;
+    background: #a7abe0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,13 +26,22 @@ body {
 
 nav {
     background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav h1 {
+    color: white;
+    margin: 0;
+    padding-left: 2%;
 }
 
 nav ul {
     display: flex;
-    justify-content: flex-end;
     list-style: none;
     padding: 0;
+    margin: 0; 
 }
 
 nav ul li {
@@ -50,6 +59,7 @@ nav ul li a {
 nav ul li a:hover {
     background-color: #555;
 }
+
 
 .login-form {
     font-family: sans-serif;
