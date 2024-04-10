@@ -40,6 +40,12 @@
                     </tr>
                 </table>             
                 <%
+                } else {
+                    %>
+                    <p>
+                        Error: User not logged in.
+                    </p>
+                    <%
                 }
                 %>
             </div>            

@@ -1,8 +1,10 @@
 package com.iotbay;
 
-public class User {
-    String email;
-    String password;
+import java.io.Serializable;
+
+public class User implements Serializable {
+    private String email;
+    private String password;
 
     public User() {
     }
