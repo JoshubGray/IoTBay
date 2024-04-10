@@ -11,12 +11,13 @@
         <script type="text/javascript" src="js/index.js"></script>
         <title>Main</title>
         <nav>
+            <h1>Main</h1>
             <ul>
                 <li><a href="index.jsp">Home</a></li>
                 <li><a href="login.jsp">Login</a></li>
-                <li><a href="#">Register</a></li>
+                <li><a href="register.jsp">Register</a></li>
                 <li><a href="welcome.jsp">Welcome</a></li>
-                <li><a href="#">Main</a></li>
+                <li><a href="main.jsp">Main</a></li>
                 <li><a href="logout.jsp">Logout</a></li>
             </ul>
         </nav>
