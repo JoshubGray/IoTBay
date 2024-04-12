@@ -10,7 +10,6 @@ public class User implements Serializable {
     private String mobilePhoneNumber;
     private boolean isActivated;
     private int savedPaymentID;
-    private int savedShiptmentID;
 
     public User() {
     }
