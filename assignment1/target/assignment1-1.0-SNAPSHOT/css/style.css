@@ -1,102 +1,116 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-body {
-    font-family: sans-serif;
-}
-.outer-container {
-    background: #a7abe0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+    body {
+        font-family: sans-serif;
+        height: 100%;
+    }
+    .outer-container {
+        background: #a7abe0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        margin: 0;
+    }
 
-.flex-container {
-    background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    padding: 20px;
-    max-width: 80%;
-}
+    .flex-container {
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        padding: 20px;
+        max-width: 80%;
+        align-items: center; /* Center items vertically */
+        justify-content: center;
+    }
 
-nav {
-    background-color: #333;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    nav {
+        background-color: #333;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-nav h1 {
-    color: white;
-    margin: 0;
-    padding-left: 2%;
-}
+    nav h1 {
+        color: white;
+        margin: 0;
+        padding-left: 2%;
+    }
 
-nav ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0; 
-}
+    nav ul {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0; 
+    }
 
-nav ul li {
-    margin: 0 10px;
-}
+    nav ul li {
+        margin: 0 10px;
+    }
 
-nav ul li a {
-    display: block;
-    padding: 15px 20px;
-    text-decoration: none;
-    color: white;
-    text-transform: uppercase;
-}
+    nav ul li a {
+        display: block;
+        padding: 15px 20px;
+        text-decoration: none;
+        color: white;
+        text-transform: uppercase;
+    }
 
-nav ul li a:hover {
-    background-color: #555;
-}
+    nav ul li a:hover {
+        background-color: #555;
+    }
 
 
-.login-form {
-    font-family: sans-serif;
-}
+    .login-form {
+        font-family: sans-serif;
+    }
 
-.login-form div {
-    margin-bottom: 10px;
-}
+    .login-form div {
+        margin-bottom: 10px;
+    }
 
-.login-form label {
-    display: inline-block;
-    width: 100px;
-}
+    .login-form label {
+        display: inline-block;
+        width: 300px;
+        padding: 1%;
+    }
 
-.login-form input[type="email"],
-.login-form input[type="password"] {
-    width: calc(100% - 120px);
-    padding: 5px;
-}
+    .login-form input[type="email"],
+    .login-form input[type="password"],
+    .login-form input[type="text"],
+    .login-form input[type="number"],
+    .login-form input[type="tel"] {
+        width: calc(100% - 120px);
+        padding: 5px;
+    }
 
-.login-form button {
-    padding: 5px 10px;
-}
+    .login-form button {
+        padding: 5px 10px;
+    }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
-th, td {
-    padding: 10px;
-    border: none;
-}
+    th, td {
+        padding: 10px;
+        border: none;
+    }
 
-th {
-    text-align: left;
-    font-weight: bold;
-    width: 50%;
-}
+    th {
+        text-align: left;
+        font-weight: bold;
+        width: 50%;
+    }
 
+    #form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    
