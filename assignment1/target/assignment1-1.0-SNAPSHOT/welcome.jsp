@@ -36,19 +36,21 @@
                     Address address = new Address(request.getParameter("street_address"), request.getParameter("postcode"), request.getParameter("city"), request.getParameter("state"));
                     String phoneNumber = request.getParameter("phone_number");
                     String mobileNumber = request.getParameter("mobile_number");
-                    CustomerUser customerUser = new CustomerUser(email, password, firstName, lastName);
-                    session.setAttribute("customerUser", customerUser);
+                    User customerUser = new CustomerUser(email, password, firstName, lastName);
+                    session.setAttribute("user", customerUser);
                 } else {
                     String staffID = request.getParameter("staff_id");
                     String staffType = request.getParameter("staff_type");
-                    Staff staff = new Staff(email, password, firstName, lastName, staffID, staffType);
-                    session.setAttribute("staff", staff);
+                    User staff = new Staff(email, password, firstName, lastName, staffID, staffType);
+                    session.setAttribute("user", staff);
                 }
+                
+                User user = (User) session.getAttribute("user");
             %>
 
             <div style="padding: 20px;">
                 <%-- Display welcome message --%>
-                <h2>Welcome, <%= firstName %></h2>
+                <h2>Welcome, <%= user.getFirstName() %></h2>
             </div>
             <p>Thank you for registering!</p>
             <!-- This is where I will save the user to the database -->
