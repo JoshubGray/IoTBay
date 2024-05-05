@@ -37,21 +37,33 @@
                     String phoneNumber = request.getParameter("phone_number");
                     String mobileNumber = request.getParameter("mobile_number");
                     User customerUser = new CustomerUser(email, password, firstName, lastName, address);
+                    if (phoneNumber != null && !phoneNumber.isEmpty() && phoneNumber.matches("\\d+")) {
+                        ((CustomerUser) customerUser).setMobilePhoneNumber(Integer.parseInt(phoneNumber));
+                    }
+                    if (mobileNumber != null && !mobileNumber.isEmpty() && mobileNumber.matches("\\d+")) {
+                        ((CustomerUser) customerUser).setHomePhoneNumber(Integer.parseInt(mobileNumber));
+                    }
                     session.setAttribute("user", customerUser);
                 } else {
                     String staffID = request.getParameter("staff_id");
                     String staffType = request.getParameter("staff_type");
-
                     User staff = new Staff(email, password, firstName, lastName);
+                    if (staffID != null && !staffID.isEmpty() && staffID.matches("\\d+")) {
+                        ((Staff) staff).setStaffID(Integer.parseInt(staffID));
+                    }
+                    if (staffID != null && !staffType.isEmpty() && staffType.matches("\\d+")) {
+                        ((Staff) staff).setStaffTypeID(Integer.parseInt(staffType));
+                    }
                     session.setAttribute("user", staff);
                 }
+                User user = null;
+                if (session.getAttribute("user") != null) {
+                    user = (User) session.getAttribute("user");
+                }
                 
-                User user = (User) session.getAttribute("user");
             %>
-
             <div style="padding: 20px;">
-                <%-- Display welcome message --%>
-                <h2>Welcome, <%= firstName %></h2>
+                <h2>Welcome, <%= user.getFirstName()%></h2>
             </div>
             <p>Thank you for registering!</p>
             <!-- This is where I will save the user to the database -->

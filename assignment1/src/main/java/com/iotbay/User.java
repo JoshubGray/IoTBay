@@ -5,18 +5,18 @@ import java.io.Serializable;
 public abstract class User implements Serializable {
     private String email;
     private String password;
-    private String firsName;
+    private String firstName;
     private String lastName;
     private UserType userType;
 
     public User() { 
-        
+
     }
 
-    public User(String email, String password, String firsName, String lastName, UserType userType) {
+    public User(String email, String password, String firstName, String lastName, UserType userType) {
         this.email = email;
         this.password = password;
-        this.firsName = firsName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.userType = userType;
     }
@@ -33,11 +33,11 @@ public abstract class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getFirsName() {
-        return firsName;
+    public String getFirstName() {
+        return firstName;
     }
-    public void setFirsName(String firsName) {
-        this.firsName = firsName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
     public String getLastName() {
         return lastName;
