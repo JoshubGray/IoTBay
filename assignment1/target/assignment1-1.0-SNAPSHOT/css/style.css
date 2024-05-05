@@ -8,13 +8,20 @@
         font-family: sans-serif;
         height: 100%;
     }
+    
+    .div {
+        display: flex;
+    }
+
     .outer-container {
         background: #a7abe0;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        height: 100%;
+        flex-direction: column;
+        height: 100vmax;
         margin: 0;
+        padding: 5%;
     }
 
     .flex-container {
@@ -22,9 +29,24 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         border-radius: 10px;
         padding: 20px;
-        max-width: 80%;
-        align-items: center; /* Center items vertically */
+        width: 50%;
+        display: flex;
+        align-items: center;
         justify-content: center;
+    }
+
+    #customer-form, #staff-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+    }   
+
+    .form-item {
+        display: flex;
+        align-items: center;
+        justify-self: center;
+        flex-direction: row;
     }
 
     nav {
@@ -64,30 +86,26 @@
     }
 
 
-    .login-form {
+    .login-form, staff-form {
         font-family: sans-serif;
     }
 
-    .login-form div {
+    .login-form div, .staff-form div {
         margin-bottom: 10px;
     }
 
-    .login-form label {
+    .login-form label, .staff-form label {
         display: inline-block;
         width: 300px;
         padding: 1%;
     }
 
-    .login-form input[type="email"],
-    .login-form input[type="password"],
-    .login-form input[type="text"],
-    .login-form input[type="number"],
-    .login-form input[type="tel"] {
-        width: calc(100% - 120px);
-        padding: 5px;
+    .login-form input, .staff-form input {
+        width: calc(100%);
+        padding: 2%;
     }
 
-    .login-form button {
+    .login-form, .staff-form button {
         padding: 5px 10px;
     }
 
@@ -113,4 +131,24 @@
         align-items: center;
         height: 100%;
     }
+
+    #register-buttons {
+        display: flex;
+        justify-content: space-between; 
+        gap: 5%;
+    }
+    
+    #register-buttons button {
+        padding: 10px 20px;
+        font-size: 16px; 
+        border-radius: 5px;
+        background-color: #f0f0f0;
+        border: 2px solid #ccc; 
+        cursor: pointer;
+    }
+    
+    #register-buttons button:hover {
+        background-color: #e0e0e0; 
+    }
+    
     

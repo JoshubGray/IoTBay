@@ -13,6 +13,13 @@ public class Address {
         this.state = state;
     }
 
+    public Address(String streetAddress, String postcode, String city, String state) {
+        this.streetAddress = streetAddress;
+        this.postcode = Integer.parseInt(postcode);
+        this.city = city;
+        this.state = state;
+    }
+
     public String getStreetAddress() {
         return streetAddress;
     }

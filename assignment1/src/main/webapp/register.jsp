@@ -2,7 +2,7 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
 <%@page import="java.util.Random"%>
-<%@ page import="com.iotbay.User" %>
+<%@ page import="com.iotbay.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,13 +101,11 @@
                                 </div>
                                 <div id="form-item">
                                     <label for="phone_number">Phone Number:</label>
-                                    <input type="tel" id="phone_number" name="phone_number"
-                                        pattern="\(\d{2}\) \d{4} \d{4}">
+                                    <input type="number" id="phone_number" name="phone_number"> 
                                 </div>
                                 <div id="form-item">
                                     <label for="mobile_number">Mobile Number:</label>
-                                    <input type="tel" id="mobile_number" name="mobile_number"
-                                        pattern="\(\d{2}\) \d{4} \d{4}">
+                                    <input type="number" id="mobile_number" name="mobile_number">
                                 </div>
                             </div>
                                 <div id="register-buttons">

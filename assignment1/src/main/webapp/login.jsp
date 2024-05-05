@@ -2,7 +2,7 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
 <%@page import="java.util.Random"%>
-<%@ page import="com.iotbay.User" %>
+<%@ page import="com.iotbay.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,9 +40,6 @@
             <div>
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
-            </div>
-            <div class="button-container">
-                <button type="submit">Login</button>
             </div>
         </form>
                 <%
