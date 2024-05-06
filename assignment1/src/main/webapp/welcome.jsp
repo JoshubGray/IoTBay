@@ -60,13 +60,12 @@
                 if (session.getAttribute("user") != null) {
                     user = (User) session.getAttribute("user");
                 }
-                
+                UserManager.addUserToDB(user);
             %>
             <div style="padding: 20px;">
                 <h2>Welcome, <%= user.getFirstName()%></h2>
             </div>
             <p>Thank you for registering!</p>
-            <!-- This is where I will save the user to the database -->
         </div>
     </div>
 </body>

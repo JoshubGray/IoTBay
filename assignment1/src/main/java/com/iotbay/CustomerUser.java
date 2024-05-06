@@ -6,7 +6,7 @@ public class CustomerUser extends User{
     private int mobilePhoneNumber;
     private boolean isActivated;
     private Integer savedPaymentID;
-    private Integer savedShiptmentID;
+    private Integer savedShipmentID;
     private UserType userType;
 
     public CustomerUser() {
@@ -20,7 +20,7 @@ public class CustomerUser extends User{
         this.mobilePhoneNumber = mobilePhoneNumber;
         this.isActivated = isActivated;
         this.savedPaymentID = savedPaymentID;
-        this.savedShiptmentID = savedShipmentID;
+        this.savedShipmentID = savedShipmentID;
     }
 
     // Registration
@@ -71,12 +71,12 @@ public class CustomerUser extends User{
         this.savedPaymentID = savedPaymentID;
     }
 
-    public Integer getSavedShiptmentID() {
-        return savedShiptmentID;
+    public Integer getSavedShipmentID() {
+        return savedShipmentID;
     }
 
-    public void setSavedShiptmentID(Integer savedShiptmentID) {
-        this.savedShiptmentID = savedShiptmentID;
+    public void setSavedShipmentID(Integer savedShiptmentID) {
+        this.savedShipmentID = savedShiptmentID;
     }
 
     public UserType getUserType() {
