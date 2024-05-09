@@ -7,14 +7,13 @@ public class CustomerUser extends User{
     private boolean isActivated;
     private Integer savedPaymentID;
     private Integer savedShipmentID;
-    private UserType userType;
 
     public CustomerUser() {
-        
+        super.setUserType(UserType.CUSTOMER_USER);
     }
 
     public CustomerUser(String email, String password, String firstName, String lastName, UserType userType, Address address, int homePhoneNumber, int mobilePhoneNumber, boolean isActivated, Integer savedPaymentID, Integer savedShipmentID) {
-        super(email, password, firstName, lastName, userType);
+        super(email, password, firstName, lastName, UserType.CUSTOMER_USER);
         this.address = address;
         this.homePhoneNumber = homePhoneNumber;
         this.mobilePhoneNumber = mobilePhoneNumber;
@@ -78,16 +77,7 @@ public class CustomerUser extends User{
     public void setSavedShipmentID(Integer savedShiptmentID) {
         this.savedShipmentID = savedShiptmentID;
     }
-
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    } 
-
-    
+ 
 
     // generate savedShipment ID
 

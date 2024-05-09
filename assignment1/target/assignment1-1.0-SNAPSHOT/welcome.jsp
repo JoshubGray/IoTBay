@@ -3,6 +3,7 @@
 <%@ page import="java.util.Random" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +34,7 @@
                 String lastName = request.getParameter("last_name");
 
                 if ("customer".equals(registeredUserType)) {
-                    Address address = new Address(request.getParameter("street_address"), request.getParameter("postcode"), request.getParameter("city"), request.getParameter("state"));
+                    Address address = new Address(request.getParameter("street_address"), Integer.parseInt(request.getParameter("postcode")), request.getParameter("city"), request.getParameter("state"));
                     String phoneNumber = request.getParameter("phone_number");
                     String mobileNumber = request.getParameter("mobile_number");
                     User customerUser = new CustomerUser(email, password, firstName, lastName, address);
@@ -59,14 +60,17 @@
                 User user = null;
                 if (session.getAttribute("user") != null) {
                     user = (User) session.getAttribute("user");
+                    UserManager.addUserToDB(user);
+                }
+                else {
+                    out.println("User is null");
                 }
                 
             %>
             <div style="padding: 20px;">
-                <h2>Welcome, <%= user.getFirstName()%></h2>
+                <h2>Welcome, <%= user != null ? user.getFirstName(): "null"%></h2>
             </div>
             <p>Thank you for registering!</p>
-            <!-- This is where I will save the user to the database -->
         </div>
     </div>
 </body>

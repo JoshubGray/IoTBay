@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.iotbay.*;
 import com.iotbay.Dao.DBConnector;
 import com.iotbay.Dao.UserDAO;
 
@@ -30,7 +29,7 @@ public class UserManager {
 
     private static ArrayList<User> userList;
 
-    private static void populateUserList(){
+    public static void populateUserList(){
         try {
             DBConnector dbConnector = new DBConnector();
             Connection connection = dbConnector.openConnection();
@@ -58,17 +57,14 @@ public class UserManager {
     * Returns registered User if user is found
     * Returns null if not found, or incorrect password
     */
-    public static User getUserFromDB(String email, String password) {
-        populateUserList();
-        for (User user : userList) {
-            if (user.getEmail().equals(email)) {
-                if (user.getPassword().equals(password)) {
-                    return user;
-                }
-                else {
-                    return null;
-                }
-            }
+    public static User loginUser(String email, String password) {
+        try {
+            DBConnector dbConnector = new DBConnector();
+            Connection connection = dbConnector.openConnection();
+            UserDAO ud = new UserDAO(connection);
+            return ud.userLogin(email, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.print(e);
         }
         return null;
     }
@@ -93,6 +89,7 @@ public class UserManager {
                 System.out.println("User Type: " + user.getUserType() + " - not found in method");
                     break;
             }
+            dbConnector.closeConnection();
         } catch (ClassNotFoundException | SQLException e) {
             System.out.print(e);
         }
