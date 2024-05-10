@@ -32,16 +32,29 @@
             <%
                 } else {
             %>
-    <form id="loginForm" action="welcome.jsp" method="post" class="login-form">
-        <div>
+    <form id="loginForm" action="login_handler.jsp" method="post" class="login-form">
+        <div style="padding: 2%; display: flex; justify-content: center;">
+            <h2>Login</h2>
+        </div>
+        <%
+        String login = request.getParameter("login");
+        if (login != null && login.equals("failed")) {
+            %>
+            <p>Login details incorrect. Please try again.</p>
+            <%
+        }
+        %>
+        <div style="padding: 2%;">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
         </div>
-        <div>
+        <div style="padding: 2%;">
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
         </div>
-        <button type="button" onclick="login()">Login</button>
+        <div style="display: flex; justify-content: center; padding-top: 10%;">
+            <button id="register-buttons" style="padding: 2%;" type="submit">Login</button>
+        </div>
     </form>
             <%
                 }

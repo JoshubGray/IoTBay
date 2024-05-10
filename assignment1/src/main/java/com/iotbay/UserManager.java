@@ -94,4 +94,8 @@ public class UserManager {
             System.out.print(e);
         }
     }
+
+    public static void debug() {
+        System.out.println("here");
+    }
 }

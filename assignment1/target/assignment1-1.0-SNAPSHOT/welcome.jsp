@@ -27,6 +27,12 @@
     <div class="outer-container">
         <div class="flex-container">
             <%
+            User user = null;
+
+            if (request.getParameter("login").equals("true")) {
+                user = request.getParameter("user");
+            }
+            else {
                 String registeredUserType = request.getParameter("userType");
                 String email = request.getParameter("email");
                 String password = request.getParameter("password"); 
@@ -57,7 +63,7 @@
                     }
                     session.setAttribute("user", staff);
                 }
-                User user = null;
+
                 if (session.getAttribute("user") != null) {
                     user = (User) session.getAttribute("user");
                     UserManager.addUserToDB(user);
@@ -65,12 +71,24 @@
                 else {
                     out.println("User is null");
                 }
+            }
                 
             %>
             <div style="padding: 20px;">
                 <h2>Welcome, <%= user != null ? user.getFirstName(): "null"%></h2>
             </div>
-            <p>Thank you for registering!</p>
+            <p>
+                if (request.getParameter("login") != null && request.getParameter("login")) {
+                    %>
+                    Login Successful!
+                    <%
+                } else {
+                    %>
+                    Thank you for registering!
+                    <%
+                }
+                %>
+            </p>
         </div>
     </div>
 </body>

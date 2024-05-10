@@ -11,7 +11,8 @@ public class UserDAO {
     private Connection connection;
     private final String customerUserReadQuery = "SELECT * FROM CustomerUser";
     private final String staffUserReadQuery = "SELECT * FROM Staff";
-    private final String userLoginReadQuery = "SELECT * FROM (SELECT * FROM CustomerUser UNION SELECT * FROM Staff) AS userTable WHERE email=? AND password=?";
+    private final String customerLoginQuery = "SELECT * FROM CustomerUser WHERE email=? AND password=?";
+    private final String staffLoginQuery = "SELECT * FROM Staff WHERE email=? AND password=?";
     private final String updateCustomerQuery = "UPDATE CustomerUser SET email=?, password=?, firstName=?, lastName=?, streetAddress=?, postcode=?, city=?, state=?, homePhoneNumber=?, mobilePhoneNumber=?, isActivated=?, savedPaymentID=?, savedShipmentID=? WHERE email=?";
     private final String updateStaffQuery = "UPDATE Staff SET email=?, password=?, firstName=?, lastName=?, staffID=?, staffTypeID=? WHERE email=?";
     private final String addCustomerQuery = "INSERT INTO CustomerUser (email, password, firstName, lastName, streetAddress, postcode, city, state, homePhoneNumber, mobilePhoneNumber, isActivated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -83,7 +84,7 @@ public class UserDAO {
             statement.setBoolean(11, customer.isActivated());
             statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("addCustomer" + e);
         }
     }
 
@@ -97,7 +98,7 @@ public class UserDAO {
             statement.setInt(6, staff.getStaffTypeID());
             statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("addStaff: " + e);
         }
     }
     /*
@@ -127,7 +128,7 @@ public class UserDAO {
             }
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("updateCustomer: " + e);
         }
     }
 
@@ -147,7 +148,7 @@ public class UserDAO {
             }
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("updateStaff: " + e);
         }
     } 
 
@@ -155,17 +156,13 @@ public class UserDAO {
      * Login
      */
     public User userLogin(String email, String password) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(userLoginReadQuery);
-        statement.setString(1, email);
-        statement.setString(2, password);
-        ResultSet result = statement.executeQuery();
-        
-        if (result.next()) {
-            int userType = result.getInt("userType");
-            switch (userType) {
-                case 1:
-                    CustomerUser customerUser = new CustomerUser();
+        try (PreparedStatement customerStatement = connection.prepareStatement(customerLoginQuery)) {
+            customerStatement.setString(1, email);
+            customerStatement.setString(2, password);
+            ResultSet result = customerStatement.executeQuery();
+    
+            if (result.next()) {
+                CustomerUser customerUser = new CustomerUser();
                     customerUser.setEmail(result.getString("email"));
                     customerUser.setPassword(result.getString("password"));
                     Address address = new Address();
@@ -198,23 +195,32 @@ public class UserDAO {
                         customerUser.setSavedShipmentID(shipmentID);
                     }
                     return customerUser;
-                case 2:
-                    Staff staff = new Staff();
-                    staff.setStaffID(result.getInt("staffID"));
-                    staff.setEmail(result.getString("email"));
-                    staff.setPassword(result.getString("password"));
-                    staff.setFirstName(result.getString("firstName"));
-                    staff.setLastName(result.getString("lastName"));
-                    staff.setStaffTypeID(result.getInt("staffTypeID"));
-                    return staff;
-                default:
-                System.out.println("User type not found");
-                return null;
             }
-        } 
-    } catch (SQLException e) {
-        System.out.println(e);
+        } catch (SQLException e) {
+            System.out.println("Error querying CustomerUser: " + e);
         }
-    return null;
+    
+        try (PreparedStatement staffStatement = connection.prepareStatement(staffLoginQuery)) {
+            staffStatement.setString(1, email);
+            staffStatement.setString(2, password);
+            ResultSet result = staffStatement.executeQuery();
+    
+            if (result.next()) {
+                Staff staff = new Staff();
+                staff.setStaffID(result.getInt("staffID"));
+                staff.setEmail(result.getString("email"));
+                staff.setPassword(result.getString("password"));
+                staff.setFirstName(result.getString("firstName"));
+                staff.setLastName(result.getString("lastName"));
+                staff.setStaffTypeID(result.getInt("staffTypeID"));
+                return staff;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error querying Staff: " + e);
+        }
+
+        // user cannot be found (login details incorrect)
+        return null;
     }
+    
 }
