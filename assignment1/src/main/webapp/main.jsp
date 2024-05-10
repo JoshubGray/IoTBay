@@ -27,6 +27,12 @@
                 <%
                 User user = (User) session.getAttribute("user");
                 if (user != null) {
+                    if (request.getAttribute("update") != null && request.getAttribute("update").equals("success")) {
+                        %>
+                        <p>Details Updated Successfully</p>
+                        <br>
+                        <%
+                    }
                 %>
                 <table>
                     <tr>

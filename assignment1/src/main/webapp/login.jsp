@@ -31,7 +31,7 @@
             <%
                 } else {
             %>
-    <form id="loginForm" action="login_handler.jsp" method="post" class="login-form">
+    <form id="loginForm" action="login_controller.jsp" method="post" class="login-form">
         <div style="padding: 2%; display: flex; justify-content: center;">
             <h2>Login</h2>
         </div>

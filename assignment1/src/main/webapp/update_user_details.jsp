@@ -33,7 +33,7 @@
                         %>
                         <!-- CustomerUser -->
                         <h3 style="padding: 5%;">Enter your new customer details:</h3>
-                        <form action="welcome.jsp" method="post" class="login-form">
+                        <form action="update_user_details_controller.jsp" method="post" class="login-form">
                             <input type="hidden" id="userTypeCustomer" name="userType" value="customer">
                             <div id="form-item">
                                 <label for="email">Email:</label>
@@ -87,7 +87,7 @@
                                 <input type="number" id="mobile_number" name="mobile_number" value="<%= user != null ? customerUser.getMobilePhoneNumber() : "" %>">
                             </div>
                             <div id="register-buttons">
-                                <button type="submit">Register</button>
+                                <button type="submit">Update Details</button>
                             </div>
                         </form>
                         <%
@@ -97,7 +97,7 @@
                         %>
                         <!-- Staff -->
                         <h3 style="padding: 5%;">Enter your new staff details:</h3>
-                        <form action="welcome.jsp" method="post" class="staff-form">
+                        <form action="update_user_details_controller.jsp" method="post" class="staff-form">
                             <input type="hidden" id="userTypeStaff" name="userType" value="staff">
                             <div id="form-item">
                                 <label for="staff_id">Staff ID:</label>
@@ -128,7 +128,7 @@
                                 </select>
                             </div>
                             <div id="register-buttons" style="padding: 5%;">
-                                <button type="submit">Register Staff Account</button>
+                                <button type="submit">Update Details</button>
                             </div>
                         </form>                        
                         <%

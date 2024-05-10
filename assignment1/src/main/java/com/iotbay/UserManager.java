@@ -48,7 +48,7 @@ public class UserManager {
             }
         }
         catch (ClassNotFoundException | SQLException e) {
-            System.out.println(e);
+            System.out.println("UserManager populateUserList: " + e);
         }
     }
 
@@ -64,7 +64,7 @@ public class UserManager {
             UserDAO ud = new UserDAO(connection);
             return ud.userLogin(email, password);
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.print(e);
+            System.out.println("UserManager loginUser: " + e);
         }
         return null;
     }
@@ -91,9 +91,36 @@ public class UserManager {
             }
             dbConnector.closeConnection();
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.print(e);
+            System.out.println("UserManager addUserToDB: " + e);
         }
     }
+
+    /*
+     * Update User account details
+     * checks UserType before performing update
+     */
+    public static void updateUserDetails(User newData, User oldData) {
+        try {
+        DBConnector dbConnector = new DBConnector();
+        Connection connection = dbConnector.openConnection();
+        UserDAO ud = new UserDAO(connection);
+        switch (oldData.getUserType()) {
+            case CUSTOMER_USER:
+                ud.updateCustomer((CustomerUser) newData, (CustomerUser) oldData);
+                break;
+            case STAFF:
+                ud.updateStaff((Staff) newData, (Staff) oldData);
+                break;
+            default:
+            System.out.println("User Type: " + oldData.getUserType() + " - not found in method");
+                break;
+            }
+            dbConnector.closeConnection();
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("UserManager updateUserDetails: " + e);
+        }
+    }
+
 
     public static void debug() {
         System.out.println("here");
