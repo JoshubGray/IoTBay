@@ -10,8 +10,13 @@ User user = UserManager.loginUser(email, password);
 if (user == null) {
     response.sendRedirect("login.jsp?login=failed");
 } else {    
-    session.setAttribute("user", user);
-
+    switch(user.getUserType()) {
+        case CUSTOMER_USER:
+        session.setAttribute("user", (CustomerUser)user);
+        break;
+        case STAFF:
+        session.setAttribute("user", (Staff)user);
+    }
     response.sendRedirect("welcome.jsp?login=success");
 }
 %>
