@@ -1,8 +1,8 @@
-<%@ page import="com.iotbay.User" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Random"%>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
+<%@ page import="com.iotbay.*" %>
 <!DOCTYPE html>
 <html>
     <head>

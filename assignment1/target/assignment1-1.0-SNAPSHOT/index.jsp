@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Random"%>
-<%@ page import="com.iotbay.User" %>
+<%@ page import="com.iotbay.*" %>
 <!DOCTYPE html>
 <html>
     <head>

@@ -2,35 +2,25 @@ package com.iotbay;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public abstract class User implements Serializable {
     private String email;
     private String password;
-    private Address address;
-    private String homePhoneNumber;
-    private String mobilePhoneNumber;
-    private boolean isActivated;
-    private int savedPaymentID;
-    private int savedShiptmentID;
+    private String firstName;
+    private String lastName;
+    private UserType userType;
 
-    public User() {
+    public User() { 
+
     }
 
-    public User(String email, String password) {
+    public User(String email, String password, String firstName, String lastName, UserType userType) {
         this.email = email;
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userType = userType;
     }
 
-    public User(String email, String password, Address address, String homePhoneNumber, String mobilePhoneNumber,
-            boolean isActivated, int savedPaymentID, int savedShiptmentID) {
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.homePhoneNumber = homePhoneNumber;
-        this.mobilePhoneNumber = mobilePhoneNumber;
-        this.isActivated = isActivated;
-        this.savedPaymentID = savedPaymentID;
-        this.savedShiptmentID = savedShiptmentID;
-    }
     public String getEmail() {
         return email;
     }
@@ -43,42 +33,22 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    public Address getAddress() {
-        return address;
+    public String getFirstName() {
+        return firstName;
     }
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
-    public String getHomePhoneNumber() {
-        return homePhoneNumber;
+    public String getLastName() {
+        return lastName;
     }
-    public void setHomePhoneNumber(String homePhoneNumber) {
-        this.homePhoneNumber = homePhoneNumber;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
-    public String getMobilePhoneNumber() {
-        return mobilePhoneNumber;
+    public UserType getUserType() {
+        return userType;
     }
-    public void setMobilePhoneNumber(String mobilePhoneNumber) {
-        this.mobilePhoneNumber = mobilePhoneNumber;
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
-    public boolean isActivated() {
-        return isActivated;
-    }
-    public void setActivated(boolean isActivated) {
-        this.isActivated = isActivated;
-    }
-    public int getSavedPaymentID() {
-        return savedPaymentID;
-    }
-    public void setSavedPaymentID(int savedPaymentID) {
-        this.savedPaymentID = savedPaymentID;
-    }
-    public int getSavedShiptmentID() {
-        return savedShiptmentID;
-    }
-    public void setSavedShiptmentID(int savedShiptmentID) {
-        this.savedShiptmentID = savedShiptmentID;
-    }
-
-
 }
