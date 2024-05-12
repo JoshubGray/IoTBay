@@ -16,7 +16,6 @@
                 <li><a href="index.jsp">Home</a></li>
                 <li><a href="login.jsp">Login</a></li>
                 <li><a href="register.jsp">Register</a></li>
-                <li><a href="welcome.jsp">Welcome</a></li>
                 <li><a href="main.jsp">Main</a></li>
                 <li><a href="logout.jsp">Logout</a></li>
             </ul>
@@ -28,6 +27,12 @@
                 <%
                 User user = (User) session.getAttribute("user");
                 if (user != null) {
+                    if (request.getAttribute("update") != null && request.getAttribute("update").equals("success")) {
+                        %>
+                        <p>Details Updated Successfully</p>
+                        <br>
+                        <%
+                    }
                 %>
                 <table>
                     <tr>

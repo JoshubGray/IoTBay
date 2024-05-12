@@ -16,7 +16,6 @@
             <li><a href="index.jsp">Home</a></li>
             <li><a href="login.jsp">Login</a></li>
             <li><a href="register.jsp">Register</a></li>
-            <li><a href="welcome.jsp">Welcome</a></li>
             <li><a href="main.jsp">Main</a></li>
             <li><a href="logout.jsp">Logout</a></li>
         </ul>
@@ -32,7 +31,7 @@
             <%
                 } else {
             %>
-    <form id="loginForm" action="login_handler.jsp" method="post" class="login-form">
+    <form id="loginForm" action="login_controller.jsp" method="post" class="login-form">
         <div style="padding: 2%; display: flex; justify-content: center;">
             <h2>Login</h2>
         </div>

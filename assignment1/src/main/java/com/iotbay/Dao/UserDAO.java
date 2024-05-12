@@ -104,23 +104,23 @@ public class UserDAO {
     /*
      * Update
      */
-    public void updateCustomer(CustomerUser customerUser) {
+    public void updateCustomer(CustomerUser newData, CustomerUser oldData) {
         try {
             PreparedStatement statement = connection.prepareStatement(updateCustomerQuery);
-            statement.setString(1, customerUser.getEmail());
-            statement.setString(2, customerUser.getPassword());
-            statement.setString(3, customerUser.getFirstName());
-            statement.setString(4, customerUser.getLastName());
-            statement.setString(5, customerUser.getAddress().getStreetAddress());
-            statement.setInt(6, customerUser.getAddress().getPostcode());
-            statement.setString(7, customerUser.getAddress().getCity());
-            statement.setString(8, customerUser.getAddress().getState());
-            statement.setInt(9, customerUser.getHomePhoneNumber());
-            statement.setInt(10, customerUser.getMobilePhoneNumber());
-            statement.setBoolean(11, customerUser.isActivated());
-            statement.setInt(12, customerUser.getSavedPaymentID());
-            statement.setInt(13, customerUser.getSavedShipmentID());
-            statement.setString(14, customerUser.getEmail());
+            statement.setString(1, newData.getEmail());
+            statement.setString(2, newData.getPassword());
+            statement.setString(3, newData.getFirstName());
+            statement.setString(4, newData.getLastName());
+            statement.setString(5, newData.getAddress().getStreetAddress());
+            statement.setInt(6, newData.getAddress().getPostcode());
+            statement.setString(7, newData.getAddress().getCity());
+            statement.setString(8, newData.getAddress().getState());
+            statement.setInt(9, newData.getHomePhoneNumber());
+            statement.setInt(10, newData.getMobilePhoneNumber());
+            statement.setBoolean(11, newData.isActivated());
+            statement.setInt(12, newData.getSavedPaymentID());
+            statement.setInt(13, newData.getSavedShipmentID());
+            statement.setString(14, oldData.getEmail());
             int rowsAffected = statement.executeUpdate();
     
             if (rowsAffected == 0) {
@@ -132,15 +132,15 @@ public class UserDAO {
         }
     }
 
-    public void updateStaff(Staff staff) {
+    public void updateStaff(Staff newData, Staff oldData) {
         try (PreparedStatement statement = connection.prepareStatement(updateStaffQuery)) {
-            statement.setString(1, staff.getEmail());
-            statement.setString(2, staff.getPassword());
-            statement.setString(3, staff.getFirstName());
-            statement.setString(4, staff.getLastName());
-            statement.setInt(5, staff.getStaffID());
-            statement.setInt(6, staff.getStaffTypeID());
-            statement.setString(7, staff.getEmail());
+            statement.setString(1, newData.getEmail());
+            statement.setString(2, newData.getPassword());
+            statement.setString(3, newData.getFirstName());
+            statement.setString(4, newData.getLastName());
+            statement.setInt(5, newData.getStaffID());
+            statement.setInt(6, newData.getStaffTypeID());
+            statement.setString(7, oldData.getEmail());
     
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated == 0) {
