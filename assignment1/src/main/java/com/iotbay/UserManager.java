@@ -121,6 +121,18 @@ public class UserManager {
         }
     }
 
+    public static void removeUser(User user) {
+        try {
+            DBConnector dbConnector = new DBConnector();
+            Connection connection = dbConnector.openConnection();
+            UserDAO ud = new UserDAO(connection);
+            ud.removeUser(user);
+            dbConnector.closeConnection();
+            } catch (ClassNotFoundException | SQLException e) {
+                System.out.println("UserManager removeUser: " + e);
+            }
+    }
+
 
     public static void debug() {
         System.out.println("here");
