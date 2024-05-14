@@ -17,6 +17,8 @@ public class UserDAO {
     private final String updateStaffQuery = "UPDATE Staff SET email=?, password=?, firstName=?, lastName=?, staffID=?, staffTypeID=? WHERE email=?";
     private final String addCustomerQuery = "INSERT INTO CustomerUser (email, password, firstName, lastName, streetAddress, postcode, city, state, homePhoneNumber, mobilePhoneNumber, isActivated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String addStaffQuery = "INSERT INTO Staff (email, password, firstName, lastName, staffID, staffTypeID) VALUES (?, ?, ?, ?, ?, ?)";
+    private final String removeStaffQuery = "DELETE FROM staff WHERE email= ?";
+    private final String removeCustomerUserQuery = "DELETE FROM customer_user WHERE email = ?";
 
     public UserDAO(Connection connection) throws SQLException {
         connection.setAutoCommit(true);
@@ -222,5 +224,28 @@ public class UserDAO {
         // user cannot be found (login details incorrect)
         return null;
     }
-    
+
+    public void removeUser(User user) {
+        switch (user.getUserType()) {
+            case CUSTOMER_USER:
+            try (PreparedStatement staffStatement = connection.prepareStatement(removeCustomerUserQuery)) {
+                staffStatement.setString(1, user.getEmail());
+                staffStatement.executeQuery();
+            } catch (SQLException e) {
+                System.out.println("Error removing Customer User: " + e);
+            }
+                return;
+            case STAFF:
+            try (PreparedStatement staffStatement = connection.prepareStatement(removeStaffQuery)) {
+                staffStatement.setString(1, user.getEmail());
+                staffStatement.executeQuery();
+            } catch (SQLException e) {
+                System.out.println("Error removing Staff: " + e);
+            }
+                return;
+            default:
+            System.out.println("Error removing User: Can't find UserType");
+                return;
+        }
+    }
 }
