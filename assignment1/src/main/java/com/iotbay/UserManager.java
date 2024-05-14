@@ -121,6 +121,11 @@ public class UserManager {
         }
     }
 
+    /*
+     * Removes the user from the database
+     * Does NOT remove the user from sessions
+     * That is handled after pressing the "remove user" button (remove_user.jsp)
+     */
     public static void removeUser(User user) {
         try {
             DBConnector dbConnector = new DBConnector();

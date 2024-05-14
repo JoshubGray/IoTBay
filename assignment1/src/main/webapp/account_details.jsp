@@ -9,14 +9,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/style.css">
         <script type="text/javascript" src="js/index.js"></script>
-        <title>Main</title>
+        <title>Account Details</title>
         <nav>
-            <h1>Main</h1>
+            <h1>Account Details</h1>
             <ul>
                 <li><a href="index.jsp">Home</a></li>
                 <li><a href="login.jsp">Login</a></li>
                 <li><a href="register.jsp">Register</a></li>
-                <li><a href="main.jsp">Main</a></li>
+                <li><a href="account_details.jsp">Account</a></li>
                 <li><a href="logout.jsp">Logout</a></li>
             </ul>
         </nav>
@@ -40,10 +40,22 @@
                         <td><%= user.getEmail() %></td>
                     </tr>
                     <tr>
-                        <th>Password:</th>
-                        <td><%= user.getPassword() %></td>
+                        <th>Name:</th>
+                        <td><%= user.getFirstName() + user.getLastName() %></td>
                     </tr>
-                </table>             
+                    <tr>
+                        <th> Account Type:</th>
+                        <td><%= user instanceof CustomerUser ? "Customer" : "Staff" %></td>
+                    </tr>
+                </table>
+                <div>
+                    <div style="display: flex; justify-content: center; padding-top: 10%;">
+                        <button id="register-buttons" style="padding: 2%;" type="submit">Update Details</button>
+                    </div>
+                    <div style="display: flex; justify-content: center; padding-top: 10%;">
+                        <button id="register-buttons" style="padding: 2%;" type="submit">Unregister</button>
+                    </div>
+                </div>
                 <%
                 } else {
                     %>
