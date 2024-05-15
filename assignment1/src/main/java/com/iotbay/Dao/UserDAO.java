@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+
 import com.iotbay.*;
+
 
 public class UserDAO {
     private Connection connection;
@@ -17,8 +20,12 @@ public class UserDAO {
     private final String updateStaffQuery = "UPDATE Staff SET email=?, password=?, firstName=?, lastName=?, staffID=?, staffTypeID=? WHERE email=?";
     private final String addCustomerQuery = "INSERT INTO CustomerUser (email, password, firstName, lastName, streetAddress, postcode, city, state, homePhoneNumber, mobilePhoneNumber, isActivated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String addStaffQuery = "INSERT INTO Staff (email, password, firstName, lastName, staffID, staffTypeID) VALUES (?, ?, ?, ?, ?, ?)";
-    private final String removeStaffQuery = "DELETE FROM staff WHERE email= ?";
-    private final String removeCustomerUserQuery = "DELETE FROM customer_user WHERE email = ?";
+    private final String removeStaffQuery = "DELETE FROM Staff WHERE email= ?";
+    private final String removeCustomerUserQuery = "DELETE FROM CustomerUser WHERE email = ?";
+    private final String updateUserLogQuery = "INSERT INTO UserAccessLogs (sessionId, email) VALUES (?, ?)";
+    private final String setUserLogoutQuery = "UPDATE UserAccessLogs SET logoutDateTime = CURRENT_TIMESTAMP WHERE sessionId = ?";
+    private final String getUserAccessDataQuery = "SELECT loginDateTime, logoutDateTime FROM UserAccessLogs WHERE email = ?";
+
 
     public UserDAO(Connection connection) throws SQLException {
         connection.setAutoCommit(true);
@@ -71,7 +78,7 @@ public class UserDAO {
     /*
      * Registration
      */
-    public void addCustomer(CustomerUser customer) {
+    public void addCustomer(CustomerUser customer, String sessionId) {
         try (PreparedStatement statement = connection.prepareStatement(addCustomerQuery)) {
             statement.setString(1, customer.getEmail());
             statement.setString(2, customer.getPassword());
@@ -85,12 +92,16 @@ public class UserDAO {
             statement.setInt(10, customer.getMobilePhoneNumber());
             statement.setBoolean(11, customer.isActivated());
             statement.executeUpdate();
+
+            // update login logs
+            updateAccessLogs(sessionId, customer.getEmail());
+
         } catch (SQLException e) {
             System.out.println("addCustomer" + e);
         }
     }
 
-    public void addStaff(Staff staff) {
+    public void addStaff(Staff staff, String sessionId) {
         try (PreparedStatement statement = connection.prepareStatement(addStaffQuery)) {
             statement.setString(1, staff.getEmail());
             statement.setString(2, staff.getPassword());
@@ -99,10 +110,28 @@ public class UserDAO {
             statement.setInt(5, staff.getStaffID());
             statement.setInt(6, staff.getStaffTypeID());
             statement.executeUpdate();
+
+            // update login logs
+            updateAccessLogs(sessionId, staff.getEmail());
+
         } catch (SQLException e) {
             System.out.println("addStaff: " + e);
         }
     }
+
+    /*
+     * Update Access Logs
+     */
+     private void updateAccessLogs(String sessionID, String email) {
+        try (PreparedStatement statement = connection.prepareStatement(updateUserLogQuery)) {
+            statement.setString(1, sessionID);
+            statement.setString(2, email);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error updating user log: " + e);
+        }
+     }
+
     /*
      * Update
      */
@@ -152,12 +181,13 @@ public class UserDAO {
         } catch (SQLException e) {
             System.out.println("updateStaff: " + e);
         }
-    } 
 
+        // update log email
+    } 
     /*
      * Login
      */
-    public User userLogin(String email, String password) {
+    public User userLogin(String email, String password, String sessionId) {
         try (PreparedStatement customerStatement = connection.prepareStatement(customerLoginQuery)) {
             customerStatement.setString(1, email);
             customerStatement.setString(2, password);
@@ -196,6 +226,10 @@ public class UserDAO {
                     if (shipmentID != null) {
                         customerUser.setSavedShipmentID(shipmentID);
                     }
+
+                    // update login logs
+                    updateAccessLogs(sessionId, email);
+
                     return customerUser;
             }
         } catch (SQLException e) {
@@ -215,6 +249,10 @@ public class UserDAO {
                 staff.setFirstName(result.getString("firstName"));
                 staff.setLastName(result.getString("lastName"));
                 staff.setStaffTypeID(result.getInt("staffTypeID"));
+                
+                // update login logs
+                updateAccessLogs(sessionId, email);
+
                 return staff;
             }
         } catch (SQLException e) {
@@ -225,27 +263,56 @@ public class UserDAO {
         return null;
     }
 
+    public void updateUserLogoutAccessLog(String sessionId) {
+        try (PreparedStatement statement = connection.prepareStatement(setUserLogoutQuery)) {
+            statement.setString(1, sessionId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error updating logout logs: " + e);
+        }
+    }
+
     public void removeUser(User user) {
         switch (user.getUserType()) {
             case CUSTOMER_USER:
-            try (PreparedStatement staffStatement = connection.prepareStatement(removeCustomerUserQuery)) {
-                staffStatement.setString(1, user.getEmail());
-                staffStatement.executeQuery();
-            } catch (SQLException e) {
-                System.out.println("Error removing Customer User: " + e);
-            }
+                try (PreparedStatement customerStatement = connection.prepareStatement(removeCustomerUserQuery)) {
+                    customerStatement.setString(1, user.getEmail());
+                    customerStatement.executeUpdate();
+                } catch (SQLException e) {
+                    System.out.println("Error removing Customer User: " + e);
+                }
                 return;
             case STAFF:
-            try (PreparedStatement staffStatement = connection.prepareStatement(removeStaffQuery)) {
-                staffStatement.setString(1, user.getEmail());
-                staffStatement.executeQuery();
-            } catch (SQLException e) {
-                System.out.println("Error removing Staff: " + e);
-            }
+                try (PreparedStatement staffStatement = connection.prepareStatement(removeStaffQuery)) {
+                    staffStatement.setString(1, user.getEmail());
+                    staffStatement.executeUpdate();
+                } catch (SQLException e) {
+                    System.out.println("Error removing Staff: " + e);
+                }
                 return;
             default:
-            System.out.println("Error removing User: Can't find UserType");
-                return;
+                System.out.println("Error removing User: Can't find UserType");
+            }
         }
+
+    // row 0 == Login time
+    // row 1 == Logout time
+    public ArrayList<Timestamp[]> getUserLogs(String email) {
+        ArrayList<Timestamp[]> results = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(getUserAccessDataQuery)) {
+            statement.setString(1, email);
+            ResultSet rs =  statement.executeQuery();
+            while (rs.next()) {
+                Timestamp[] row = new Timestamp[2];
+                row[0] = rs.getTimestamp("loginDateTime");
+                row[1] = rs.getTimestamp("logoutDateTime");
+                results.add(row);
+            }
+            return results;
+        } catch (SQLException e) {
+                System.out.println("Error updating logout logs: " + e);
+                return null;
+            }
     }
 }
+    
