@@ -27,17 +27,28 @@
 <body>
     <nav>
         <h1>Register</h1>
+        <%
+        if (session != null && session.getAttribute("user") != null) { 
+        %>
+        <ul>
+            <li><a href="index.jsp">Home</a></li>
+            <li><a href="account_details.jsp">Account</a></li>
+            <li><a href="logout.jsp">Logout</a></li>
+        </ul>
+
+        <!--Menu Items => If User is NOT logged in-->
+
+        <%
+        } else {
+        %>
         <ul>
             <li><a href="index.jsp">Home</a></li>
             <li><a href="login.jsp">Login</a></li>
             <li><a href="register.jsp">Register</a></li>
-<<<<<<< HEAD
-            <li><a href="main.jsp">Main</a></li>
-=======
-            <li><a href="account_details.jsp">Account</a></li>
->>>>>>> 13f57fd748abca24cc255e6539e6e9c9668ce24e
-            <li><a href="logout.jsp">Logout</a></li>
         </ul>
+        <% 
+        }
+        %>
     </nav>
     <div class="outer-container">
         <div class="flex-container" style="flex-direction: column;">

@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.iotbay.AppTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s - in com.iotbay.AppTest
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s - in com.iotbay.AppTest
->>>>>>> 13f57fd748abca24cc255e6539e6e9c9668ce24e
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in com.iotbay.AppTest

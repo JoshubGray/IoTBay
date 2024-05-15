@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-com\iotbay\UserManager$1.class
-com\iotbay\App.class
-=======
 com/iotbay/Staff.class
 com/iotbay/Order.class
 com/iotbay/Shipment.class
@@ -20,4 +16,3 @@ com/iotbay/Payment.class
 com/iotbay/UserManager$1.class
 com/iotbay/UserManager.class
 com/iotbay/App.class
->>>>>>> 13f57fd748abca24cc255e6539e6e9c9668ce24e

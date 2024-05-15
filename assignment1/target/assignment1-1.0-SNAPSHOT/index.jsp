@@ -31,11 +31,6 @@
                 <li><a href="index.jsp">Home</a></li>
                 <li><a href="login.jsp">Login</a></li>
                 <li><a href="register.jsp">Register</a></li>
-<<<<<<< HEAD
-                <li><a href="main.jsp">Main</a></li>
-                <li><a href="logout.jsp">Logout</a></li>
-=======
->>>>>>> 13f57fd748abca24cc255e6539e6e9c9668ce24e
             </ul>
             <% 
         }
@@ -45,6 +40,18 @@
     </head>
     <!-- Leave the "startTime()" in the tag-->
     <body onload="startTime()" >
-        <div class="outer-container"></div>
+        <div class="outer-container">
+            <div class="flex-container" style="flex-direction: column;">
+                <%
+                if (request.getParameter("unregister") != null) {
+                %>
+                <p><%= request.getParameter("unregister") %></p>
+                <br>
+                <%
+                }
+                %>
+                <p>Content Placeholder</p>
+            </div>           
+        </div>
     </body>
 </html>
