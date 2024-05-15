@@ -31,7 +31,7 @@
                             <label for="cardType">Payment Method:</label>
                             </div>
                             <div>
-                                <select id="cardType" name="cardType" style="font-size: medium;" required>
+                                <select id="cardType" name="cardType" style="font-size: medium;">
                                     <option value="">Select a card type</option>
                                     <option value="Visa">Visa</option>
                                     <option value="Mastercard">Mastercard</option>
@@ -39,12 +39,12 @@
                                 </select>
                             </div>
                         <div id="form-item">
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password" maxlength="30" required>
+                            <label for="cardNumber">Card Number:</label>
+                            <input type="number" id="cardNumber" name="cardNumber" maxlength="19" required>
                         </div>
                         <div id="form-item">
-                            <label for="first_name">First Name:</label>
-                            <input type="text" id="first_name" name="first_name" maxlength="20" required>
+                            <label for="expiry_date">First Name:</label>
+                            <input type="number" id="dateMonth" name="dateMonth" maxlength="2" required>
                         </div>
                         <div id="form-item">
                             <label for="last_name">Last Name:</label>
