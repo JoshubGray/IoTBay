@@ -42,5 +42,5 @@
         UserManager.updateUserDetails(staff, session.getAttribute("user"));
         session.setAttribute("user", staff);
     }
-    response.sendRedirect("account_details.jsp?update=success");
+    response.sendRedirect("main.jsp?update=success");
     %>

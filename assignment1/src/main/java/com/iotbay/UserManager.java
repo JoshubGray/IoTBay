@@ -2,7 +2,6 @@ package com.iotbay;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.iotbay.Dao.DBConnector;
@@ -58,12 +57,12 @@ public class UserManager {
     * Returns registered User if user is found
     * Returns null if not found, or incorrect password
     */
-    public static User loginUser(String email, String password, String sessionId) {
+    public static User loginUser(String email, String password) {
         try {
             DBConnector dbConnector = new DBConnector();
             Connection connection = dbConnector.openConnection();
             UserDAO ud = new UserDAO(connection);
-            return ud.userLogin(email, password, sessionId);
+            return ud.userLogin(email, password);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("UserManager loginUser: " + e);
         }
@@ -74,17 +73,17 @@ public class UserManager {
      * Registration
      * Adds new User to DB
      */
-    public static void addUserToDB(String sessionId, User user) {
+    public static void addUserToDB(User user) {
         try {
         DBConnector dbConnector = new DBConnector();
         Connection connection = dbConnector.openConnection();
         UserDAO ud = new UserDAO(connection);
             switch (user.getUserType()) {
                 case CUSTOMER_USER:
-                    ud.addCustomer((CustomerUser)user, sessionId);
+                    ud.addCustomer((CustomerUser)user);
                     break;
                 case STAFF:
-                    ud.addStaff(((Staff)user), sessionId);
+                    ud.addStaff(((Staff)user));
                     break;
                 default:
                 System.out.println("User Type: " + user.getUserType() + " - not found in method");
@@ -125,7 +124,7 @@ public class UserManager {
     /*
      * Removes the user from the database
      * Does NOT remove the user from sessions
-     * That is handled after pressing the "remove user" button (unregister_controller.jsp)
+     * That is handled after pressing the "remove user" button (remove_user.jsp)
      */
     public static void removeUser(User user) {
         try {
@@ -139,40 +138,6 @@ public class UserManager {
             }
     }
 
-    // Data Log methods
-
-    /*
-     * Updates the time when user logs out to the DB
-     */
-    public static void updateLogoutData(String sessionId) {
-        try {
-            DBConnector dbConnector = new DBConnector();
-            Connection connection = dbConnector.openConnection();
-            UserDAO ud = new UserDAO(connection);
-            ud.updateUserLogoutAccessLog(sessionId);
-            dbConnector.closeConnection();
-            } catch (ClassNotFoundException | SQLException e) {
-                System.out.println("UserManager removeUser: " + e);
-            }
-    }
-
-    /*
-     * Get Access Log information from the DB based on the email passed through
-     */
-    public static ArrayList<Timestamp[]> getAccessDataLogs(String email) {
-        ArrayList<Timestamp[]> results = new ArrayList<>();
-        try {
-            DBConnector dbConnector = new DBConnector();
-            Connection connection = dbConnector.openConnection();
-            UserDAO ud = new UserDAO(connection);
-            results = ud.getUserLogs(email);
-            dbConnector.closeConnection();
-            return results;
-        } catch (SQLException | ClassNotFoundException e) {
-            System.out.println("Error getting access logs: " + e);
-            }
-        return null;
-    }
 
     public static void debug() {
         System.out.println("here");
