@@ -121,6 +121,23 @@ public class UserManager {
         }
     }
 
+    /*
+     * Removes the user from the database
+     * Does NOT remove the user from sessions
+     * That is handled after pressing the "remove user" button (remove_user.jsp)
+     */
+    public static void removeUser(User user) {
+        try {
+            DBConnector dbConnector = new DBConnector();
+            Connection connection = dbConnector.openConnection();
+            UserDAO ud = new UserDAO(connection);
+            ud.removeUser(user);
+            dbConnector.closeConnection();
+            } catch (ClassNotFoundException | SQLException e) {
+                System.out.println("UserManager removeUser: " + e);
+            }
+    }
+
 
     public static void debug() {
         System.out.println("here");
