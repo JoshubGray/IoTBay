@@ -65,8 +65,19 @@
             <div>
                 <%
                 if (session != null && session.getAttribute("user") != null) { 
+
+                    <!-- Enter logic for when an account is not logged in 
+                        
+                        Although, you may redirect the page so that an unregistered/registered user never gets here,
+                        in the offchance that they do (human error), you should handle it to avoid an error
+                        
+                        I've added a default. Change it to suit your page.
+                    
+                    -->
                 %>
+
                 <p>User is not logged in.</p>
+                
                 <%
                 } else {
                 %>
