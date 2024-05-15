@@ -27,7 +27,10 @@
                         '<p>Redirecting to Home</p>' +
                     '</div>' +
                 '</div>';
-                <% session.invalidate(); %>
+                <%
+                UserManager.updateLogoutData(session.getId());
+                session.invalidate(); 
+                %>
                 setTimeout(function() {
                     window.location.href = "index.jsp";
                 }, 1000);
@@ -38,10 +41,6 @@
         <h1>Logout</h1>
         <ul>
             <li><a href="index.jsp">Home</a></li>
-            <li><a href="login.jsp">Login</a></li>
-            <li><a href="register.jsp">Register</a></li>
-            <li><a href="account_details.jsp">Account</a></li>
-            <li><a href="logout.jsp">Logout</a></li>
         </ul>
     </nav>
 </head>

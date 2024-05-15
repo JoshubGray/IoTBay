@@ -15,13 +15,28 @@
 <body>
     <nav>
         <h1>Welcome</h1>
+        <%
+        if (session != null && session.getAttribute("user") != null) { 
+        %>
+        <ul>
+            <li><a href="index.jsp">Home</a></li>
+            <li><a href="account_details.jsp">Account</a></li>
+            <li><a href="logout.jsp">Logout</a></li>
+        </ul>
+
+        <!--Menu Items => If User is NOT logged in-->
+
+        <%
+        } else {
+        %>
         <ul>
             <li><a href="index.jsp">Home</a></li>
             <li><a href="login.jsp">Login</a></li>
             <li><a href="register.jsp">Register</a></li>
-            <li><a href="account_details.jsp">Account</a></li>
-            <li><a href="logout.jsp">Logout</a></li>
         </ul>
+        <% 
+        }
+        %>
     </nav>
 
     <div class="outer-container">
@@ -66,7 +81,7 @@
 
                 if (session.getAttribute("user") != null) {
                     user = (User) session.getAttribute("user");
-                    UserManager.addUserToDB(user);
+                    UserManager.addUserToDB(session.getId(), user);
                 }
                 else {
                     out.println("User is null");
