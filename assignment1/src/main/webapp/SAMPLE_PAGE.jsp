@@ -72,8 +72,6 @@
                 */
 
                 %>
-
-                <p>User is not logged in.</p>
                 
                 <%
                 } else {
@@ -89,6 +87,7 @@
                 
                 }
                 %>
+                <p>User is not logged in.</p>
             </div>
         </div>            
     </div>        
