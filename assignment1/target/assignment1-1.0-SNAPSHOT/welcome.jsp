@@ -16,9 +16,9 @@
     <nav>
         <h1>Welcome</h1>
         <ul>
+            <li><a href="index.jsp">Home</a></li>
             <li><a href="login.jsp">Login</a></li>
             <li><a href="register.jsp">Register</a></li>
-            <li><a href="welcome.jsp">Welcome</a></li>
             <li><a href="main.jsp">Main</a></li>
             <li><a href="logout.jsp">Logout</a></li>
         </ul>
@@ -28,9 +28,9 @@
         <div class="flex-container">
             <%
             User user = null;
-
-            if (request.getParameter("login").equals("true")) {
-                user = request.getParameter("user");
+            String login = request.getParameter("login");
+            if (login != null && login.equals("success")) {
+                user = (User) session.getAttribute("user");
             }
             else {
                 String registeredUserType = request.getParameter("userType");
@@ -39,7 +39,7 @@
                 String firstName = request.getParameter("first_name");
                 String lastName = request.getParameter("last_name");
 
-                if ("customer".equals(registeredUserType)) {
+                if (registeredUserType.equals("customer")) {
                     Address address = new Address(request.getParameter("street_address"), Integer.parseInt(request.getParameter("postcode")), request.getParameter("city"), request.getParameter("state"));
                     String phoneNumber = request.getParameter("phone_number");
                     String mobileNumber = request.getParameter("mobile_number");
@@ -50,7 +50,7 @@
                     if (mobileNumber != null && !mobileNumber.isEmpty() && mobileNumber.matches("\\d+")) {
                         ((CustomerUser) customerUser).setHomePhoneNumber(Integer.parseInt(mobileNumber));
                     }
-                    session.setAttribute("user", customerUser);
+                    session.setAttribute("user", (CustomerUser)customerUser);
                 } else {
                     String staffID = request.getParameter("staff_id");
                     String staffType = request.getParameter("staff_type");
@@ -61,7 +61,7 @@
                     if (staffID != null && !staffType.isEmpty() && staffType.matches("\\d+")) {
                         ((Staff) staff).setStaffTypeID(Integer.parseInt(staffType));
                     }
-                    session.setAttribute("user", staff);
+                    session.setAttribute("user", (Staff)staff);
                 }
 
                 if (session.getAttribute("user") != null) {
@@ -71,23 +71,18 @@
                 else {
                     out.println("User is null");
                 }
-            }
-                
+            }              
             %>
             <div style="padding: 20px;">
                 <h2>Welcome, <%= user != null ? user.getFirstName(): "null"%></h2>
             </div>
+            <br>
             <p>
-                if (request.getParameter("login") != null && request.getParameter("login")) {
-                    %>
+                <% if (login != null && login.equals("success")) { %>
                     Login Successful!
-                    <%
-                } else {
-                    %>
+                <% } else { %>
                     Thank you for registering!
-                    <%
-                }
-                %>
+                <% } %>
             </p>
         </div>
     </div>

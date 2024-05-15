@@ -8,6 +8,24 @@ public class Payment implements Serializable {
     private String cardNumber;
     private String expiryDate;
     private Address billingAddress;
+    private String cvn;
+    private double amount;
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public void setCvn(String cvn) {
+        this.cvn = cvn;
+    }
+
+    public String getCvn() {
+        return cvn;
+    }
 
     public Payment() {
     }

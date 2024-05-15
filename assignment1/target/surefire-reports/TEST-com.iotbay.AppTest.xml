@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.iotbay.AppTest" time="0.011" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.iotbay.AppTest" time="0.015" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="AU"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\jasgr\AppData\Local\Temp\surefire13920154378664661039\surefirebooter15418530032543724254.jar C:\Users\jasgr\AppData\Local\Temp\surefire13920154378664661039 2024-05-13T11-40-36_591-jvmRun1 surefire1591304619538873870tmp surefire_015655855746854325983tmp"/>
+    <property name="sun.java.command" value="C:\Users\jasgr\AppData\Local\Temp\surefire10515262725685971128\surefirebooter414751136802417765.jar C:\Users\jasgr\AppData\Local\Temp\surefire10515262725685971128 2024-05-15T11-12-44_271-jvmRun1 surefire6282850062631537709tmp surefire_05189704300006255009tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\jasgr\IoTBay\assignment1\target\test-classes;C:\Users\jasgr\IoTBay\assignment1\target\classes;C:\Users\jasgr\.m2\repository\javax\javaee-api\8.0\javaee-api-8.0.jar;C:\Users\jasgr\.m2\repository\com\sun\mail\javax.mail\1.6.0\javax.mail-1.6.0.jar;C:\Users\jasgr\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar;C:\Users\jasgr\.m2\repository\com\mysql\mysql-connector-j\8.3.0\mysql-connector-j-8.3.0.jar;C:\Users\jasgr\.m2\repository\com\google\protobuf\protobuf-java\3.25.1\protobuf-java-3.25.1.jar;C:\Users\jasgr\.m2\repository\org\eclipse\jetty\jetty-server\9.4.12.v20180830\jetty-server-9.4.12.v20180830.jar;C:\Users\jasgr\.m2\repository\javax\servlet\javax.servlet-api\3.1.0\javax.servlet-api-3.1.0.jar;C:\Users\jasgr\.m2\repository\org\eclipse\jetty\jetty-http\9.4.12.v20180830\jetty-http-9.4.12.v20180830.jar;C:\Users\jasgr\.m2\repository\org\eclipse\jetty\jetty-util\9.4.12.v20180830\jetty-util-9.4.12.v20180830.jar;C:\Users\jasgr\.m2\repository\org\eclipse\jetty\jetty-io\9.4.12.v20180830\jetty-io-9.4.12.v20180830.jar;C:\Users\jasgr\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.2.0\junit-jupiter-api-5.2.0.jar;C:\Users\jasgr\.m2\repository\org\apiguardian\apiguardian-api\1.0.0\apiguardian-api-1.0.0.jar;C:\Users\jasgr\.m2\repository\org\opentest4j\opentest4j\1.1.0\opentest4j-1.1.0.jar;C:\Users\jasgr\.m2\repository\org\junit\platform\junit-platform-commons\1.2.0\junit-platform-commons-1.2.0.jar;C:\Users\jasgr\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.2.0\junit-jupiter-params-5.2.0.jar;C:\Users\jasgr\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.2.0\junit-jupiter-engine-5.2.0.jar;C:\Users\jasgr\.m2\repository\org\junit\platform\junit-platform-engine\1.2.0\junit-platform-engine-1.2.0.jar;C:\Users\jasgr\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\jasgr\.m2\repository\org\mockito\mockito-junit-jupiter\2.21.0\mockito-junit-jupiter-2.21.0.jar;C:\Users\jasgr\.m2\repository\org\mockito\mockito-core\2.21.0\mockito-core-2.21.0.jar;C:\Users\jasgr\.m2\repository\net\bytebuddy\byte-buddy\1.8.15\byte-buddy-1.8.15.jar;C:\Users\jasgr\.m2\repository\net\bytebuddy\byte-buddy-agent\1.8.15\byte-buddy-agent-1.8.15.jar;C:\Users\jasgr\.m2\repository\org\objenesis\objenesis\2.6\objenesis-2.6.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\jasgr\AppData\Local\Temp\surefire13920154378664661039\surefirebooter15418530032543724254.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\jasgr\AppData\Local\Temp\surefire10515262725685971128\surefirebooter414751136802417765.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.2+13-LTS-58"/>
@@ -58,5 +58,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testApp" classname="com.iotbay.AppTest" time="0.007"/>
+  <testcase name="testApp" classname="com.iotbay.AppTest" time="0.015"/>
 </testsuite>
