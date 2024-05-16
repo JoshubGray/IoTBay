@@ -1,12 +1,17 @@
 <%@ page import="java.util.List, com.iotbay.Product, com.iotbay.ProductManager, com.iotbay.Dao.DBConnector" %>
 <%@ page import="java.sql.Connection, java.sql.SQLException" %>
 <%
+    String searchQuery = request.getParameter("searchQuery");
     List<Product> products = null;
     try {
         DBConnector dbConnector = new DBConnector();
         Connection connection = dbConnector.openConnection();
         ProductManager productManager = new ProductManager(connection);
-        products = productManager.listProducts();
+        if (searchQuery != null && !searchQuery.isEmpty()) {
+            products = productManager.searchProducts(searchQuery);
+        } else {
+            products = productManager.listProducts();
+        }
         dbConnector.closeConnection();
     } catch (ClassNotFoundException | SQLException e) {
         e.printStackTrace();
@@ -19,6 +24,11 @@
 </head>
 <body>
     <h1>Product List</h1>
+    <form method="get" action="listProducts.jsp">
+        <label for="searchQuery">Search:</label>
+        <input type="text" name="searchQuery" id="searchQuery">
+        <button type="submit">Search</button>
+    </form>
     <table border="1">
         <thead>
             <tr>

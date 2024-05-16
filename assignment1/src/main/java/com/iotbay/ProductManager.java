@@ -40,6 +40,27 @@ public class ProductManager {
         return products;
     }
 
+    public List<Product> searchProducts(String searchQuery) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM Product WHERE name LIKE ? OR description LIKE ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, "%" + searchQuery + "%");
+            stmt.setString(2, "%" + searchQuery + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Product product = new Product();
+                    product.setProductID(rs.getInt("productID"));
+                    product.setName(rs.getString("name"));
+                    product.setDescription(rs.getString("description"));
+                    product.setUnitPrice(rs.getDouble("unitPrice"));
+                    product.setQuantityInStock(rs.getInt("quantityInStock"));
+                    products.add(product);
+                }
+            }
+        }
+        return products;
+    }
+
     public void updateProduct(Product product) throws SQLException {
         String query = "UPDATE Product SET name = ?, description = ?, unitPrice = ?, quantityInStock = ? WHERE productID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
