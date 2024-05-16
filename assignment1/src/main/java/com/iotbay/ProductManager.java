@@ -12,27 +12,28 @@ public class ProductManager {
     }
 
     public void addProduct(Product product) throws SQLException {
-        String query = "INSERT INTO products (name, description, unit_price, quantity_in_stock) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO Product (productID, name, description, unitPrice, quantityInStock) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, product.getName());
-            stmt.setString(2, product.getDescription());
-            stmt.setDouble(3, product.getUnitPrice());
-            stmt.setInt(4, product.getQuantityInStock());
+            stmt.setInt(1, product.getProductID());
+            stmt.setString(2, product.getName());
+            stmt.setString(3, product.getDescription());
+            stmt.setDouble(4, product.getUnitPrice());
+            stmt.setInt(5, product.getQuantityInStock());
             stmt.executeUpdate();
         }
     }
 
     public List<Product> listProducts() throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM products";
+        String query = "SELECT * FROM Product";
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 Product product = new Product();
-                product.setProductID(rs.getInt("product_id"));
+                product.setProductID(rs.getInt("productID"));
                 product.setName(rs.getString("name"));
                 product.setDescription(rs.getString("description"));
-                product.setUnitPrice(rs.getDouble("unit_price"));
-                product.setQuantityInStock(rs.getInt("quantity_in_stock"));
+                product.setUnitPrice(rs.getDouble("unitPrice"));
+                product.setQuantityInStock(rs.getInt("quantityInStock"));
                 products.add(product);
             }
         }
@@ -40,7 +41,7 @@ public class ProductManager {
     }
 
     public void updateProduct(Product product) throws SQLException {
-        String query = "UPDATE products SET name = ?, description = ?, unit_price = ?, quantity_in_stock = ? WHERE product_id = ?";
+        String query = "UPDATE Product SET name = ?, description = ?, unitPrice = ?, quantityInStock = ? WHERE productID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, product.getName());
             stmt.setString(2, product.getDescription());
@@ -52,7 +53,7 @@ public class ProductManager {
     }
 
     public void deleteProduct(int productID) throws SQLException {
-        String query = "DELETE FROM products WHERE product_id = ?";
+        String query = "DELETE FROM Product WHERE productID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, productID);
             stmt.executeUpdate();

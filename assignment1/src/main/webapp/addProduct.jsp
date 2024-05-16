@@ -6,7 +6,7 @@
         double unitPrice = Double.parseDouble(request.getParameter("unitPrice"));
         int quantityInStock = Integer.parseInt(request.getParameter("quantityInStock"));
 
-        Product product = new Product();
+        Product product = new Product(); // ここでランダムIDが生成されます
         product.setName(name);
         product.setDescription(description);
         product.setUnitPrice(unitPrice);
