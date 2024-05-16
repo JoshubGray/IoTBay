@@ -57,12 +57,46 @@
                         </tr>
                         <tr>
                             <th>Name:</th>
-                            <td><%= user.getFirstName() + user.getLastName() %></td>
+                            <td><%= user.getFirstName() + " " + user.getLastName() %></td>
                         </tr>
                         <tr>
                             <th> Account Type:</th>
                             <td><%= user instanceof CustomerUser ? "Customer" : "Staff" %></td>
                         </tr>
+                    <%
+                    // Display Account Details
+
+                    if (user instanceof CustomerUser) {
+                        CustomerUser customerUser = (CustomerUser) user;
+                        Address address = customerUser.getAddress();
+                    %>
+                    <tr>
+                        <th> Address:</th>
+                        <td><%= address.getStreetAddress() + " " + address.getCity() + " " + address.getPostcode() + " " + address.getState() %></td>
+                    </tr>
+                    <tr>
+                        <th> Home Phone:</th>
+                        <td><%= customerUser.getHomePhoneNumber() == -1 ? "None" : customerUser.getHomePhoneNumber() %></td>
+                    </tr>
+                    <tr>
+                        <th> Mobile Phone:</th>
+                        <td><%= customerUser.getMobilePhoneNumber() == -1 ? "None" : customerUser.getMobilePhoneNumber() %></td>
+                    </tr>
+                    <%
+                    } else {
+                        Staff staff = (Staff) user;
+                    %>
+                    <tr>
+                        <th> Staff ID:</th>
+                        <td><%= staff.getStaffID() %></td>
+                    </tr>
+                    <tr>
+                        <th> Staff Type:</th>
+                        <td><%= staff.getStaffTypeID() %></td>
+                    </tr>
+                    <%
+                    }
+                    %>
                     </table>
                     <br>
                     <br>

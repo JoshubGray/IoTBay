@@ -122,6 +122,21 @@ public class UserManager {
         }
     }
 
+    // Check duplicate email (Validation)
+    public static boolean isEmailUnique(String email) {
+        try {
+            DBConnector dbConnector = new DBConnector();
+            Connection connection = dbConnector.openConnection();
+            UserDAO ud = new UserDAO(connection);
+            boolean res = ud.checkDuplicateEmail(email);
+            dbConnector.closeConnection();
+            return res;
+            } catch (ClassNotFoundException | SQLException e) {
+                System.out.println("UserManager removeUser: " + e);
+            }
+            return false;
+    }
+
     /*
      * Removes the user from the database
      * Does NOT remove the user from sessions
