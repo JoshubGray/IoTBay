@@ -1,23 +1,16 @@
-<%@ page import="java.util.ArrayList, java.util.List, com.iotbay.Product" %>
+<%@ page import="java.util.List, com.iotbay.Product, com.iotbay.ProductManager, com.iotbay.Dao.DBConnector" %>
+<%@ page import="java.sql.Connection, java.sql.SQLException" %>
 <%
-    List<Product> products = new ArrayList<>();
-
-    // テストデータの作成
-    Product product1 = new Product();
-    product1.setProductID(1);
-    product1.setName("Test Product 1");
-    product1.setDescription("This is a test product.");
-    product1.setUnitPrice(100.0);
-    product1.setQuantityInStock(10);
-    products.add(product1);
-
-    Product product2 = new Product();
-    product2.setProductID(2);
-    product2.setName("Test Product 2");
-    product2.setDescription("This is another test product.");
-    product2.setUnitPrice(200.0);
-    product2.setQuantityInStock(20);
-    products.add(product2);
+    List<Product> products = null;
+    try {
+        DBConnector dbConnector = new DBConnector();
+        Connection connection = dbConnector.openConnection();
+        ProductManager productManager = new ProductManager(connection);
+        products = productManager.listProducts();
+        dbConnector.closeConnection();
+    } catch (ClassNotFoundException | SQLException e) {
+        e.printStackTrace();
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -38,7 +31,7 @@
             </tr>
         </thead>
         <tbody>
-            <% if (products != null) { %>
+            <% if (products != null && !products.isEmpty()) { %>
                 <% for (Product product : products) { %>
                     <tr>
                         <td><%= product.getProductID() %></td>
