@@ -3,6 +3,8 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
 <%@ page import="com.iotbay.*" %>
+<%@ page import="java.net.URLEncoder" %>
+
 
 <%
 String registeredUserType = request.getParameter("userType");
@@ -51,13 +53,12 @@ String errorField = null;
         }
 
         if (errorField != null) {
-            errorField += " input is invalid. Please try again.";
-            request.setAttribute("errorField", errorField);
-            response.sendRedirect("register.jsp?registerAttempt=errorField");
+            request.setAttribute("errorField", errorField + " input is invalid. Please try again.");
+            response.sendRedirect("register.jsp?errorField=" + URLEncoder.encode((String) request.getAttribute("errorField"), "UTF-8"));            
         } else {
-            session.setAttribute("user", (CustomerUser)customerUser);
+            session.setAttribute("user", (CustomerUser) customerUser);
             UserManager.addUserToDB(session.getId(), customerUser);
-        }
+        }        
 
     } else {
         String staffID = request.getParameter("staff_id");
@@ -88,13 +89,12 @@ String errorField = null;
         }
 
         if (errorField != null) {
-            errorField += " input is invalid. Please try again.";
-            request.setAttribute("errorField", errorField);
-            response.sendRedirect("register.jsp?registerAttempt=errorField");
+            request.setAttribute("errorField", errorField + " input is invalid. Please try again.");
+            response.sendRedirect("register.jsp?errorField=" + URLEncoder.encode((String) request.getAttribute("errorField"), "UTF-8"));            
         } else {
-            session.setAttribute("user", (Staff)staff);
+            session.setAttribute("user", (Staff) staff);
             UserManager.addUserToDB(session.getId(), staff);
-        }
+        }        
     }
 
     response.sendRedirect("welcome.jsp");

@@ -3,6 +3,8 @@
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
 <%@page import="java.util.Random"%>
 <%@ page import="com.iotbay.*" %>
+<%@ page import="java.net.URLEncoder" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,9 +55,25 @@
             If registration is invalid, it redirects to this page and displays the error here.
         */
 
-        String errorField = (String) request.getAttribute("errorField");
+        String errorMessage = (String) request.getAttribute("errorField");
+
         %>
     </nav>
+
+    <%
+    String errorField = request.getParameter("errorField");
+    %>
+
+    <% if (errorField != null && !errorField.isEmpty()) { %>
+        <div class="outer-container">
+            <div class="flex-container" style="flex-direction: column;">
+                <br>
+                <p>Error: <%= errorField %></p>
+                <br>
+            </div>
+        </div>
+    <% } %>
+
     <div class="outer-container">
         <div class="flex-container" style="flex-direction: column;">
             <% if (session != null && session.getAttribute("user") != null) { %>
@@ -72,17 +90,6 @@
             <div id="customer-form">
                 <div>
                     <h3 style="padding: 5%;">Please enter your customer details:</h3>
-                    <%
-                    if (errorField != null) {
-                    %>
-                    <div>
-                        <br>
-                            <p>Error: <%= errorField %></p>
-                        <br>
-                    </div>
-                    <%
-                    }
-                    %>
                         <form action="register_controller.jsp" method="post" class="login-form">
                             <input type="hidden" id="userTypeCustomer" name="userType" value="customer">
                             <div id="form-item">
@@ -150,17 +157,6 @@
     -->
             <div id="staff-form" style="display: none;">
                 <h3 style="padding: 5%;">Enter your staff details:</h3>
-                <%
-                if (errorField != null) {
-                %>
-                <div>
-                    <br>
-                        <p>Error: <%= errorField %></p>
-                    <br>
-                </div>
-                <%
-                }
-                %>
                 <div>
                 <form action="register_controller.jsp" method="post" class="staff-form">
                     <input type="hidden" id="userTypeStaff" name="userType" value="staff">
