@@ -15,63 +15,42 @@
 <body>
     <nav>
         <h1>Welcome</h1>
+        <%
+        if (session != null && session.getAttribute("user") != null) { 
+        %>
+        <ul>
+            <li><a href="index.jsp">Home</a></li>
+            <li><a href="account_details.jsp">Account</a></li>
+            <li><a href="logout.jsp">Logout</a></li>
+        </ul>
+
+        <!--Menu Items => If User is NOT logged in-->
+
+        <%
+        } else {
+        %>
         <ul>
             <li><a href="index.jsp">Home</a></li>
             <li><a href="login.jsp">Login</a></li>
             <li><a href="register.jsp">Register</a></li>
-            <li><a href="account_details.jsp">Account</a></li>
-            <li><a href="logout.jsp">Logout</a></li>
         </ul>
+        <% 
+        }
+        %>
     </nav>
 
     <div class="outer-container">
         <div class="flex-container">
             <%
             User user = null;
-            String login = request.getParameter("login");
-            if (login != null && login.equals("success")) {
+            if (session.getAttribute("user") != null) {
                 user = (User) session.getAttribute("user");
             }
-            else {
-                String registeredUserType = request.getParameter("userType");
-                String email = request.getParameter("email");
-                String password = request.getParameter("password"); 
-                String firstName = request.getParameter("first_name");
-                String lastName = request.getParameter("last_name");
-
-                if (registeredUserType.equals("customer")) {
-                    Address address = new Address(request.getParameter("street_address"), Integer.parseInt(request.getParameter("postcode")), request.getParameter("city"), request.getParameter("state"));
-                    String phoneNumber = request.getParameter("phone_number");
-                    String mobileNumber = request.getParameter("mobile_number");
-                    User customerUser = new CustomerUser(email, password, firstName, lastName, address);
-                    if (phoneNumber != null && !phoneNumber.isEmpty() && phoneNumber.matches("\\d+")) {
-                        ((CustomerUser) customerUser).setMobilePhoneNumber(Integer.parseInt(phoneNumber));
-                    }
-                    if (mobileNumber != null && !mobileNumber.isEmpty() && mobileNumber.matches("\\d+")) {
-                        ((CustomerUser) customerUser).setHomePhoneNumber(Integer.parseInt(mobileNumber));
-                    }
-                    session.setAttribute("user", (CustomerUser)customerUser);
-                } else {
-                    String staffID = request.getParameter("staff_id");
-                    String staffType = request.getParameter("staff_type");
-                    User staff = new Staff(email, password, firstName, lastName);
-                    if (staffID != null && !staffID.isEmpty() && staffID.matches("\\d+")) {
-                        ((Staff) staff).setStaffID(Integer.parseInt(staffID));
-                    }
-                    if (staffID != null && !staffType.isEmpty() && staffType.matches("\\d+")) {
-                        ((Staff) staff).setStaffTypeID(Integer.parseInt(staffType));
-                    }
-                    session.setAttribute("user", (Staff)staff);
-                }
-
-                if (session.getAttribute("user") != null) {
-                    user = (User) session.getAttribute("user");
-                    UserManager.addUserToDB(user);
-                }
-                else {
-                    out.println("User is null");
-                }
-            }              
+            /*
+            Login Logic
+            */
+            String login = request.getParameter("login");
+           
             %>
             <div style="padding: 20px;">
                 <h2>Welcome, <%= user != null ? user.getFirstName(): "null"%></h2>

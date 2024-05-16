@@ -27,13 +27,34 @@
 <body>
     <nav>
         <h1>Register</h1>
+        <%
+        if (session != null && session.getAttribute("user") != null) { 
+        %>
+        <ul>
+            <li><a href="index.jsp">Home</a></li>
+            <li><a href="account_details.jsp">Account</a></li>
+            <li><a href="logout.jsp">Logout</a></li>
+        </ul>
+
+        <!--Menu Items => If User is NOT logged in-->
+
+        <%
+        } else {
+        %>
         <ul>
             <li><a href="index.jsp">Home</a></li>
             <li><a href="login.jsp">Login</a></li>
             <li><a href="register.jsp">Register</a></li>
-            <li><a href="account_details.jsp">Account</a></li>
-            <li><a href="logout.jsp">Logout</a></li>
         </ul>
+        <% 
+        }
+        /*
+            Register logic
+            If registration is invalid, it redirects to this page and displays the error here.
+        */
+
+        String errorField = (String) request.getAttribute("errorField");
+        %>
     </nav>
     <div class="outer-container">
         <div class="flex-container" style="flex-direction: column;">
@@ -51,7 +72,18 @@
             <div id="customer-form">
                 <div>
                     <h3 style="padding: 5%;">Please enter your customer details:</h3>
-                        <form action="welcome.jsp" method="post" class="login-form">
+                    <%
+                    if (errorField != null) {
+                    %>
+                    <div>
+                        <br>
+                            <p>Error: <%= errorField %></p>
+                        <br>
+                    </div>
+                    <%
+                    }
+                    %>
+                        <form action="register_controller.jsp" method="post" class="login-form">
                             <input type="hidden" id="userTypeCustomer" name="userType" value="customer">
                             <div id="form-item">
                                 <label for="email">Email:</label>
@@ -118,8 +150,19 @@
     -->
             <div id="staff-form" style="display: none;">
                 <h3 style="padding: 5%;">Enter your staff details:</h3>
+                <%
+                if (errorField != null) {
+                %>
                 <div>
-                <form action="welcome.jsp" method="post" class="staff-form">
+                    <br>
+                        <p>Error: <%= errorField %></p>
+                    <br>
+                </div>
+                <%
+                }
+                %>
+                <div>
+                <form action="register_controller.jsp" method="post" class="staff-form">
                     <input type="hidden" id="userTypeStaff" name="userType" value="staff">
                     <div id="form-item">
                         <label for="staff_id">Staff ID:</label>

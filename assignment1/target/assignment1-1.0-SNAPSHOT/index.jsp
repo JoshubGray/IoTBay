@@ -40,6 +40,18 @@
     </head>
     <!-- Leave the "startTime()" in the tag-->
     <body onload="startTime()" >
-        <div class="outer-container"></div>
+        <div class="outer-container">
+            <div class="flex-container" style="flex-direction: column;">
+                <%
+                if (request.getParameter("unregister") != null) {
+                %>
+                <p><%= request.getParameter("unregister") %></p>
+                <br>
+                <%
+                }
+                %>
+                <p>Content Placeholder</p>
+            </div>           
+        </div>
     </body>
 </html>

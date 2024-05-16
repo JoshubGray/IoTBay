@@ -15,4 +15,5 @@ com/iotbay/CustomerUser.class
 com/iotbay/Payment.class
 com/iotbay/UserManager$1.class
 com/iotbay/UserManager.class
+com/iotbay/UserValidation.class
 com/iotbay/App.class
