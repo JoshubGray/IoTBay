@@ -8,11 +8,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/style.css">
-    <title>Register</title>
+    <title>Make Payment</title>
 </head>
 <body>
     <nav>
-        <h1>Register</h1>
+        <h1>Payment</h1>
         <ul>
             <li><a href="index.jsp">Home</a></li>
             <li><a href="login.jsp">Login</a></li>
@@ -26,7 +26,7 @@
             <div>
                 <h3 style="padding: 5%;">Please enter your payment details:</h3>
                     <form action="thankyou.jsp" method="post" class="login-form">
-                        <input type="hidden" id="paymentID" name="paymentID" value="orderID">
+                        <!-- <input type="hidden" id="paymentID" name="paymentID" value="orderID"> -->
                         <div id="form-item">
                             <label for="cardType">Payment Method:</label>
                             </div>
@@ -42,18 +42,19 @@
                             <label for="cardNumber">Card Number:</label>
                             <input type="number" id="cardNumber" name="cardNumber" maxlength="19" required>
                         </div>
-                        <div id="form-item">
-                            <label for="expiry_date">First Name:</label>
-                            <input type="number" id="dateMonth" name="dateMonth" maxlength="2" required>
+                        <div>
+                            <label for="expiry_date">Expiry Date:</label>
+                            <div id="date_input">
+                                <input type="number" name="dateMonth" maxlength="2" required>
+                                <span>/</span>
+                                <input type="number" name="dateYear" maxlength="2" required>
+                            </div>
                         </div>
                         <div id="form-item">
-                            <label for="last_name">Last Name:</label>
-                            <input type="text" id="last_name" name="last_name" maxlength="20" required>
+                            <label for="cvn">CVC/CVV:</label>
+                            <input type="number" id="cvn" name="cvn" maxlength="3" required>
                         </div>
-                        <div id="form-item">
-                            <label for="street_address">Street Address:</label>
-                            <input type="text" id="street_address" name="street_address" maxlength="30" required>
-                        </div>
+                        <input type="hidden" id="customerEmail" name="customerEmail" value="orderID">
                         <div id="form-item">
                             <label for="postcode">Postcode:</label>
                             <input type="number" id="postcode" name="postcode" min="0" max="9999" required>
@@ -82,8 +83,8 @@
                                 <input type="number" id="mobile_number" name="mobile_number">
                             </div>
                         </div>
-                            <div id="register-buttons">
-                                <button type="submit">Register</button>
+                            <div id="payment-buttons">
+                                <button type="submit">Pay</button>
                             </div>
                         </div>
                     </form>

@@ -150,5 +150,11 @@
     #register-buttons button:hover {
         background-color: #e0e0e0; 
     }
+
+    #date_input {
+        vertical-align: left;
+        margin-right: 5px;
+        float: left;
+    }
     
     
