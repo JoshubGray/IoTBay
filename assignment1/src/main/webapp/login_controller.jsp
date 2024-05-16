@@ -5,7 +5,7 @@
 <%
 String email = request.getParameter("email");
 String password = request.getParameter("password");
-User user = UserManager.loginUser(email, password);
+User user = UserManager.loginUser(email, password, session.getId());
 
 if (user == null) {
     response.sendRedirect("login.jsp?login=failed");
