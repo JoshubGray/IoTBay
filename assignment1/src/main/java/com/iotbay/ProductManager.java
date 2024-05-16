@@ -80,4 +80,23 @@ public class ProductManager {
             stmt.executeUpdate();
         }
     }
+
+    public Product getProductById(int productID) throws SQLException {
+        Product product = null;
+        String query = "SELECT * FROM Product WHERE productID = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, productID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    product = new Product();
+                    product.setProductID(rs.getInt("productID"));
+                    product.setName(rs.getString("name"));
+                    product.setDescription(rs.getString("description"));
+                    product.setUnitPrice(rs.getDouble("unitPrice"));
+                    product.setQuantityInStock(rs.getInt("quantityInStock"));
+                }
+            }
+        }
+        return product;
+    }
 }
