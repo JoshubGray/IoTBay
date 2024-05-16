@@ -2,8 +2,8 @@ package com.iotbay;
 
 public class CustomerUser extends User{
     private Address address;
-    private int homePhoneNumber;
-    private int mobilePhoneNumber;
+    private int homePhoneNumber = -1;
+    private int mobilePhoneNumber = -1;
     private boolean isActivated;
     private Integer savedPaymentID;
     private Integer savedShipmentID;

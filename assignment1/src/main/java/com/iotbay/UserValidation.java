@@ -7,7 +7,7 @@ package com.iotbay;
 
 public class UserValidation {
 
-    private final static String alphanumericPattern = "^[a-zA-Z-'\\s]+$";
+    private final static String alphanumericPattern = "^[a-zA-Z0-9-\\s]+$";
     private final static String postcodePattern = "\\d{4,8}";
     private final static String phonePattern = "^[0-9]{8,15}$";
     private final static String staffIdPattern = "^[0-9]{8}$";
@@ -15,6 +15,18 @@ public class UserValidation {
     public static boolean isEmailValid(String email) {
         if (email.length() > 60) {
             return false;
+        }
+        return true;
+    }
+
+        // checks if oldEmail != newEmail && newEmail does not exist in the db
+        // update method
+    public static boolean isEmailValid(String oldEmail, String newEmail) {
+        if (newEmail.length() > 60) {
+            return false;
+        }
+        else if (!oldEmail.equals(newEmail)) {
+            
         }
         return true;
     }
@@ -31,7 +43,6 @@ public class UserValidation {
         if (field.isEmpty()) {
             return false;
         }
-        System.out.println(field);
         return field.matches(alphanumericPattern);
     }
 

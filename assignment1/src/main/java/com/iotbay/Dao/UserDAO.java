@@ -25,6 +25,8 @@ public class UserDAO {
     private final String updateUserLogQuery = "INSERT INTO UserAccessLogs (sessionId, email) VALUES (?, ?)";
     private final String setUserLogoutQuery = "UPDATE UserAccessLogs SET logoutDateTime = CURRENT_TIMESTAMP WHERE sessionId = ?";
     private final String getUserAccessDataQuery = "SELECT loginDateTime, logoutDateTime FROM UserAccessLogs WHERE email = ?";
+    private final String checkDuplicateEmail = "SELECT COUNT(*) FROM CustomerUser WHERE email = ?";
+    private final String updateUserAccessLogsEmailQuery = "UPDATE UserAccessLogs SET email = ? WHERE email = ?";
 
 
     public UserDAO(Connection connection) throws SQLException {
@@ -153,14 +155,45 @@ public class UserDAO {
             statement.setInt(13, newData.getSavedShipmentID());
             statement.setString(14, oldData.getEmail());
             int rowsAffected = statement.executeUpdate();
-    
+
             if (rowsAffected == 0) {
                 System.out.println("Update failed - Customer not likely found");
             }
+
+            updateEmailInUserAccessLogs(newData.getEmail(), oldData.getEmail());
             statement.close();
         } catch (SQLException e) {
             System.out.println("updateCustomer: " + e);
         }
+    }
+
+    private void updateEmailInUserAccessLogs(String newEmail, String oldEmail) {
+        try (PreparedStatement statement = connection.prepareStatement(updateUserAccessLogsEmailQuery)) {
+            statement.setString(1, oldEmail);
+            statement.setString(2, newEmail);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error updating user log: " + e);
+        }
+     }
+
+    public boolean checkDuplicateEmail(String email) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(checkDuplicateEmail)) {
+            preparedStatement.setString(1, email);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    if (count > 0) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public void updateStaff(Staff newData, Staff oldData) {
