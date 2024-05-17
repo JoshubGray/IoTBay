@@ -1,64 +1,24 @@
 package com.iotbay;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import com.iotbay.Dao.DBConnector;
+import com.iotbay.Dao.PaymentDAO;
 
 public class Payment implements Serializable {
-    private int paymentID;
-    private String cardType;
-    private String cardNumber;
-    private String expiryDate;
-    private Address billingAddress;
-    private String cvn;
-    private double amount;
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public void setCvn(String cvn) {
-        this.cvn = cvn;
-    }
-
-    public String getCvn() {
-        return cvn;
-    }
-
-    public Payment() {
-    }
-
-    public int getPaymentID() {
-        return paymentID;
-    }
-    public void setPaymentID(int paymentID) {
-        this.paymentID = paymentID;
-    }
-    public String getCardType() {
-        return cardType;
-    }
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
-    }
-    public String getCardNumber() {
-        return cardNumber;
-    }
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-    public String getExpiryDate() {
-        return expiryDate;
-    }
-    public void setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-    public Address getAddress() {
-        return billingAddress;
-    }
-    public void setAddress(Address billingAddress) {
-        this.billingAddress = billingAddress;
+    public static void makePayment(String PaymentID, String cardType, String cardNumber, String cvn, double amount, String customerEmail, String expiryDateMonth, String expiryDateYear) {
+        try {
+            DBConnector dbConnector = new DBConnector();
+            Connection connection = dbConnector.openConnection();
+            PaymentDAO pd = new PaymentDAO(connection);
+            pd.addPayment(PaymentID, cardType, cardNumber, cvn, amount, customerEmail, expiryDateMonth, expiryDateYear);
+            dbConnector.closeConnection();
+            } 
+            catch (ClassNotFoundException | SQLException e) {
+                System.out.println("UserManager addUserToDB: " + e);
+            }
     }
     
 }

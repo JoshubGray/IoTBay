@@ -26,7 +26,7 @@
             <div>
                 <h3 style="padding: 5%;">Please enter your payment details:</h3>
                     <form action="thankyou.jsp" method="post" class="login-form">
-                        <!-- <input type="hidden" id="paymentID" name="paymentID" value="orderID"> -->
+                        <input type="hidden" id="paymentID" name="paymentID" value=${orderID}>
                         <div id="form-item">
                             <label for="cardType">Payment Method:</label>
                             </div>
@@ -55,33 +55,7 @@
                             <input type="number" id="cvn" name="cvn" maxlength="3" required>
                         </div>
                         <input type="hidden" id="customerEmail" name="customerEmail" value="orderID">
-                        <div id="form-item">
-                            <label for="postcode">Postcode:</label>
-                            <input type="number" id="postcode" name="postcode" min="0" max="9999" required>
-                        </div>
-                        <div id="form-item">
-                            <label for="city">City:</label>
-                            <input type="text" id="city" name="city" maxlength="40" required>
-                        </div>
-                        <div id="form-item">
-                            <label for="state">State:</label>
-                            </div>
-                            <div>
-                            <select id="cardType" name="cardType" style="font-size: medium;" required>
-                                <option value="">Select a state</option>
-                                <option value="Visa">Visa</option>
-                                <option value="Mastercard">Mastercard</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            </div>
-                            <div id="form-item">
-                                <label for="phone_number">Phone Number:</label>
-                                <input type="number" id="phone_number" name="phone_number"> 
-                            </div>
-                            <div id="form-item">
-                                <label for="mobile_number">Mobile Number:</label>
-                                <input type="number" id="mobile_number" name="mobile_number">
-                            </div>
+                        <label>Amount Due: </label> 
                         </div>
                             <div id="payment-buttons">
                                 <button type="submit">Pay</button>
