@@ -37,6 +37,26 @@
         </nav>
     </head>
     <body>
+        <%
+        /*
+            Update logic
+            If update is invalid, it redirects to this page and displays the error here.
+        */
+
+        String errorMessage = (String) request.getAttribute("errorField");
+        String errorField = request.getParameter("errorField");
+        %>
+    
+        <% if (errorField != null && !errorField.isEmpty()) { %>
+            <div class="outer-container">
+                <div class="flex-container" style="flex-direction: column;">
+                    <br>
+                    <p>Error: <%= errorField %></p>
+                    <br>
+                </div>
+            </div>
+        <% } %>
+
         <div class="outer-container">
             <div class="flex-container">
                 <%
