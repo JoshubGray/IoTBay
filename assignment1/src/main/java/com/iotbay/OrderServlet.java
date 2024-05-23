@@ -1,4 +1,4 @@
-package com.iotbay.servlet;
+package com.iotbay.Dao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
