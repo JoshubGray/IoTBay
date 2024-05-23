@@ -9,7 +9,7 @@
     <div>
         <a href="CreateOrder.jsp">Create Order</a>
         <a href="OrderServlet?action=list">Review Orders</a>
-        <a href="main.jsp">Back to Main Menu</a>
+        <a href="Ordermain.jsp">Back to Main Menu</a>
     </div>
 </body>
 </html>
