@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.model.Order" %>
+<%@ page import="com.iotbay.Dao.Order" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
