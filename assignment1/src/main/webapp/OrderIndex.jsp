@@ -7,7 +7,7 @@
 <body>
     <h1>Welcome to Order Management</h1>
     <div>
-        <a href="create.jsp">Create Order</a>
+        <a href="CreateOrder.jsp">Create Order</a>
         <a href="OrderServlet?action=list">Review Orders</a>
         <a href="main.jsp">Back to Main Menu</a>
     </div>
