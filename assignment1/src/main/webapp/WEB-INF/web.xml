@@ -4,6 +4,16 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
       version="3.1">
+
+  <servlet>//added by Jaykin
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>com.iotbay.Dao.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/OrderServlet</url-pattern>
+    </servlet-mapping>//added by Jaykin for Order
+  
   <servlet>
     <servlet-name>index.jsp</servlet-name>
     <jsp-file>/index.jsp</jsp-file>
