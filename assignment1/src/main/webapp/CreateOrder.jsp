@@ -13,7 +13,7 @@
             <tr><td>Order Date:</td><td><input type="date" name="date" required></td></tr>
         </table>
         <div>
-            <a href="index.jsp">Cancel</a>
+            <a href="OrderIndex.jsp">Cancel</a>
             <input type="submit" value="Submit">
         </div>
     </form>
