@@ -2,6 +2,7 @@ package com.iotbay;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.iotbay.Dao.DBConnector;
@@ -19,6 +20,20 @@ public class Payment implements Serializable {
             catch (ClassNotFoundException | SQLException e) {
                 System.out.println("UserManager addUserToDB: " + e);
             }
+    }
+    
+    public static ResultSet queryHistory(){
+        try {
+            DBConnector dbConnector = new DBConnector();
+            Connection connection = dbConnector.openConnection();
+            PaymentDAO pd = new PaymentDAO(connection);
+            pd.queryHistory();
+            dbConnector.closeConnection();
+            } 
+            catch (ClassNotFoundException | SQLException e) {
+                System.out.println("PaymentManager queryHistory: " + e);
+            }
+        return null;
     }
     
 }

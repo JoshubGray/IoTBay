@@ -2,6 +2,7 @@ package com.iotbay.Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
@@ -10,6 +11,7 @@ import java.sql.Timestamp;
 public class PaymentDAO {
     private Connection connection;
     private final String addPaymentQuery = "INSERT INTO Payment (paymentID, cardType, cardNumber, cvn, amount, customerEmail, timestamp, expiryDateMonth, expiryDateYear) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String queryHistory = "SELECT paymentID, cardType, cardNumber, amount, timestamp FROM payment";
 
     public PaymentDAO(Connection connection) throws SQLException {
         connection.setAutoCommit(true);
@@ -30,9 +32,22 @@ public class PaymentDAO {
             statement.setString(9, expiryDateYear);
             statement.executeUpdate();
 
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) {
             System.out.println("addPayment" + e);
         }
+    }
+
+    public ResultSet queryHistory() {
+        try {
+            PreparedStatement statement=connection.prepareStatement(queryHistory);
+            ResultSet results=statement.executeQuery();
+            return results;
+        } 
+        catch (SQLException e) {
+            System.out.println("queryHistory" + e);
+        }
+        return null;
     }
 }
     
