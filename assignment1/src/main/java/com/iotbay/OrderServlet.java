@@ -1,15 +1,12 @@
 package com.iotbay.Dao;
 
+import com.iotbay.model.Order;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.iotbay.Dao.DatabaseConnection;
-import com.iotbay.Dao.OrderDAO;
-import com.iotbay.model.Order;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -18,12 +15,22 @@ import java.util.List;
 @WebServlet("/OrderServlet")
 public class OrderServlet extends HttpServlet {
     private OrderDAO orderDAO;
+    private Connection connection;
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            DBConnector dbConnector = new DBConnector();
+            connection = dbConnector.openConnection();
+            orderDAO = new OrderDAO(connection);
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new ServletException(e);
+        }
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        Connection connection = DatabaseConnection.getConnection();
-        orderDAO = new OrderDAO(connection);
         try {
             switch (action) {
                 case "insert":
@@ -50,8 +57,6 @@ public class OrderServlet extends HttpServlet {
             }
         } catch (SQLException ex) {
             throw new ServletException(ex);
-        } finally {
-            DatabaseConnection.closeConnection();
         }
     }
 
@@ -126,5 +131,16 @@ public class OrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
+    }
+
+    @Override
+    public void destroy() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
