@@ -1,4 +1,4 @@
-<%@ page import="com.example.model.Order" %>
+<%@ page import="com.iotbay.Dao.Orderclass" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,7 @@
             </tr>
         </table>
         <div>
-            <a href="index.jsp">Cancel</a>
+            <a href="OrderIndex.jsp">Cancel</a>
             <input type="submit" value="Submit">
         </div>
     </form>
