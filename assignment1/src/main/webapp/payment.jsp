@@ -55,7 +55,7 @@
                             <input type="number" id="cvn" name="cvn" maxlength="3" required>
                         </div>
                         <input type="hidden" id="customerEmail" name="customerEmail" value="orderID">
-                        <label>Amount Due: </label> 
+                        <label>Amount Due: $99999.99</label> 
                         </div>
                             <div id="payment-buttons">
                                 <button type="submit">Pay</button>

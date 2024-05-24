@@ -46,23 +46,20 @@
             String cardType = request.getParameter("cardType");
             String cardNumber = request.getParameter("cardNumber"); 
             String cvn = request.getParameter("cvn");
-            double amount = request.getParameter("amount");
-            String email= session.getAttribute("user").getEmail();
+            double amount = 99999.99;
+            User user = (User) session.getAttribute("user");
+            String email= user.getEmail();
             String expiryDateMonth= request.getParameter("dateMonth");
             String expiryDateYear= request.getParameter("dateYear");
 
-            Payment.makePayment(PaymentID, cardType, cardNumber, cvn, amount, email, expiryDateMonth, expiryDateYear);
+            Payment.makePayment(paymentID, cardType, cardNumber, cvn, amount, email, expiryDateMonth, expiryDateYear);
             %>
             <div style="padding: 20px;">
-                <h2>Welcome, <%= user != null ? user.getFirstName(): "null"%></h2>
+                <h2>Payment Processing</h2>
             </div>
             <br>
             <p>
-                <% if (login != null && login.equals("success")) { %>
-                    Login Successful!
-                <% } else { %>
-                    Thank you for registering!
-                <% } %>
+                Thank you for your order.
             </p>
         </div>
     </div>
