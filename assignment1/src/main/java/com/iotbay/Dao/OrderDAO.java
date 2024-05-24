@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.iotbay.model.Order;
+import com.iotbay.Dao.Orderclass;
 
 public class OrderDAO {
     private Connection connection;
