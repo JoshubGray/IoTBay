@@ -1,13 +1,13 @@
 package com.iotbay.Dao;
 
+import com.iotbay.model.Order;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.iotbay.Dao.Orderclass;
 
 public class OrderDAO {
     private Connection connection;
@@ -83,7 +83,6 @@ public class OrderDAO {
         }
     }
 
-    // search order by id
     public List<Order> selectOrderById(int orderId) throws SQLException {
         List<Order> orders = new ArrayList<>();
         String sql = "SELECT * FROM orders WHERE orderId = ?";
@@ -101,7 +100,6 @@ public class OrderDAO {
         return orders;
     }
 
-    // search order by date
     public List<Order> selectOrderByDate(String date) throws SQLException {
         List<Order> orders = new ArrayList<>();
         String sql = "SELECT * FROM orders WHERE date = ?";
