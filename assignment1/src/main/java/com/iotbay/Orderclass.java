@@ -1,4 +1,4 @@
-package com.iotbay.model;
+package com.iotbay.Dao;
 
 public class Order {
     private String name;
