@@ -51,4 +51,7 @@ public abstract class User implements Serializable {
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
+    public boolean isStaff() {
+        return this.userType == UserType.STAFF;
+    }
 }

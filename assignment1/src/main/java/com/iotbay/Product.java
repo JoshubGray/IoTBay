@@ -54,9 +54,9 @@ public class Product implements Serializable {
     public void setQuantityInStock(int quantityInStock) {
         this.quantityInStock = quantityInStock;
     }
-
+        //generateID for productID//
     private int generateRandomID() {
         Random random = new Random();
-        return 1000000000 + random.nextInt(900000000); // 10桁のランダムな整数を生成
+        return 1000000000 + random.nextInt(900000000); 
     }
 }
