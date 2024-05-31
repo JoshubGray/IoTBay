@@ -94,7 +94,7 @@ String errorField = null;
         } else {
             session.setAttribute("user", (Staff) staff);
             UserManager.addUserToDB(session.getId(), staff);
-        }        
+        }
     }
 
     response.sendRedirect("welcome.jsp");
